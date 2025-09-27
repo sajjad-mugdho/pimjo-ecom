@@ -29,7 +29,7 @@ export default function RootLayout({
         className={`${dm_sans.variable} antialiased bg-white dark:bg-black`}
       >
         <Navbar />
-        <Container>{children}</Container>
+        {children}
         <Footer />
       </body>
     </html>
