@@ -1,10 +1,10 @@
-
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/ui/Footer";
 import Container from "../components/ui/Container";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const dm_sans = DM_Sans({
   subsets: ["latin"],
@@ -25,12 +25,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dm_sans.variable} antialiased`}>
-        <Container>
-          <Navbar />
-          {children}
-          <Footer />
-        </Container>
+      <body
+        className={`${dm_sans.variable} antialiased bg-white dark:bg-black`}
+      >
+        <Navbar />
+        <Container>{children}</Container>
+        <Footer />
       </body>
     </html>
   );
