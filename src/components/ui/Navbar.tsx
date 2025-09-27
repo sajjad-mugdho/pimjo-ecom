@@ -109,7 +109,7 @@ const Navbar = () => {
           </div>
           <div className="hidden lg:block ">
             <Link
-              href="/auth"
+              href="/sign-in"
               className="text-sm text-white flex items-center justify-center gap-2"
             >
               <span>
@@ -271,7 +271,7 @@ const Navbar = () => {
             </button>
 
             {/* user / account link */}
-            <Link href="/auth" className="p-1">
+            <Link href="/sign-in" className="p-1">
               <svg
                 width="24"
                 height="24"
@@ -285,9 +285,27 @@ const Navbar = () => {
                 />
               </svg>
             </Link>
+            {/* favorite link */}
+            <Link href="#" className="p-1 hidden md:block">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12.0001 21.35L10.5501 20.03C5.40005 15.36 2.00005 12.28 2.00005 8.5C2.00005 5.42 4.42005 3 7.50005 3C9.24005 3 10.91 3.81 12.0001 5.08C13.0901 3.81 14.7601 3 16.5001 3C19.5801 3 22.0001 5.42 22.0001 8.5C22.0001 12.28 18.6001 15.36 13.4501 20.04L12.0001 21.35Z"
+                  stroke="#374151"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </Link>
 
             {/* cart link */}
-            <Link href="/cart" className="p-1">
+            <Link href="#" className="p-1">
               <svg
                 width="30"
                 height="30"
