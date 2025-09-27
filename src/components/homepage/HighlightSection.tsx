@@ -47,9 +47,9 @@ const products: Product[] = [
 const HighlightSection = () => {
   return (
     <section className="flex items-center bg-white w-full justify-center  mx-auto min-h-[850px]">
-      <div className="max-w-[1280px] w-full mx-auto px-8 py-28">
+      <div className="max-w-[1280px] w-full mx-auto px:4 md:px-8 py-28">
         <div className="w-full flex flex-col items-center justify-center text-center">
-          <h2 className="text-5xl font-semibold mb-6 leading-12 text-[#1F2937]">
+          <h2 className="text-4xl md:text-5xl font-semibold mb-6 leading-12 text-[#1F2937]">
             Handpicked Highlights
           </h2>
 
@@ -66,7 +66,7 @@ const HighlightSection = () => {
               key={p.id}
               className="bg-white flex flex-col items-center justify-center gap-y-3 p-4 rounded-lg"
             >
-              <div className="relative w-full max-w-[283px] h-[326px] group">
+              <div className="relative w-full max-w-[328px] md:max-w-[283px] min-h-[377px] md:h-[326px] group">
                 <Image
                   src={p.image}
                   alt={p.alt}
@@ -112,7 +112,7 @@ const HighlightSection = () => {
                 </button>
               </div>
 
-              <div className="w-full max-w-[283px]">
+              <div className="w-full max-w-[328px] md:max-w-[283px]">
                 <div className="flex items-center justify-between mb-2">
                   <h3 className="text-[16px] font-medium text-[#1F2937] leading-6">
                     {p.title}
@@ -126,7 +126,7 @@ const HighlightSection = () => {
                 </p>
               </div>
 
-              <div className="w-full max-w-[283px]">
+              <div className="w-full max-w-[328px]  md:max-w-[283px]">
                 <button className="bg-white flex items-center justify-center gap-x-4 text-[#1F2937] hover:bg-[#3758F9] hover:border-none hover:text-white border-[1px] border-[#D1D5DB] w-full py-2 px-4 rounded-md">
                   <span className="text-current">
                     <svg

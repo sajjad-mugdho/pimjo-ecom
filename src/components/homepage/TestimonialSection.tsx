@@ -29,12 +29,12 @@ const TestimonialSection = () => {
   ];
   return (
     <section className="flex items-center bg-[#F3F4F6] w-full justify-center  mx-auto min-h-[700px]">
-      <div className="max-w-[1280px] w-full p-8">
-        <div className=" max-w-[112px] px-3 py-1 bg-[#3758F90D] text-[#3758F9] rounded-[16px] flex items-center justify-center text-[16px] font-medium z-20">
+      <div className="max-w-[1280px] w-full px-4 py-8 md:p-8">
+        <div className="max-w-[112px] px-3 py-1 bg-[#3758F90D] text-[#3758F9] rounded-[16px] flex items-center justify-center text-[16px] font-medium z-20 mx-auto md:mx-0">
           Testimonials
         </div>
         <div className="max-w-[600px] mt-6">
-          <h2 className="text-5xl font-semibold mb-6 leading-12 text-[#1F2937]">
+          <h2 className="text-4xl md:text-5xl text-center md:text-left font-semibold mb-6 leading-10 md:leading-12 text-[#1F2937]">
             Hear from Our Happy Customers
           </h2>
         </div>
@@ -42,7 +42,7 @@ const TestimonialSection = () => {
           {items.map((item) => (
             <div
               key={item.id}
-              className="bg-white w-[392px] h-[264px] p-6 rounded-2xl flex flex-col items-start text-left"
+              className="bg-white w-full max-w-[328px] md:max-w-[392px] min-h-[288px] md:h-[264px] p-6 rounded-2xl flex flex-col items-start text-left mx-auto"
             >
               {/* reviewer stars */}
               <div className="flex items-center mb-6">
@@ -69,7 +69,7 @@ const TestimonialSection = () => {
                   alt={item.name}
                   width={40}
                   height={40}
-                  className="w-12 h-12rounded-full"
+                  className="w-12 h-12 rounded-full"
                 />
                 <div className="">
                   <h3 className="text-md font-medium text-[#374151] leading-6">

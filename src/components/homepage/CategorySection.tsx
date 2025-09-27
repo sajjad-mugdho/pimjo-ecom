@@ -50,9 +50,9 @@ const categories: Category[] = [
 const CategorySection = () => {
   return (
     <section className="flex items-center bg-[#F3F4F6] w-full justify-center  mx-auto min-h-[700px]">
-      <div className="max-w-[1280px] w-full mx-auto p-8">
+      <div className="max-w-[1280px] w-full mx-auto p-4 md:p-8">
         <div className="max-w-[570px]">
-          <h2 className="text-5xl font-semibold mb-6 text-left leading-12 text-[#1F2937]">
+          <h2 className="text-4xl md:text-5xl font-semibold mb-6 text-left leading-12 text-[#1F2937]">
             Shop by Category
           </h2>
 
@@ -67,9 +67,9 @@ const CategorySection = () => {
           {categories.map((cat) => (
             <div
               key={cat.id}
-              className="bg-white p-2 rounded-2xl w-[224px] h-[292px]"
+              className="bg-white p-2 rounded-2xl max-w-[328px] md:max-w-[224px] min-h-[292px]"
             >
-              <div className="relative w-full h-[188px] mb-4">
+              <div className="relative w-full h-[282px] md:h-[188px] mb-4">
                 <Image
                   src={cat.image}
                   alt={cat.alt}
