@@ -66,7 +66,7 @@ const HighlightSection = () => {
               key={p.id}
               className="bg-white flex flex-col items-center justify-center gap-y-3 p-4 rounded-lg"
             >
-              <div className="relative w-full max-w-[328px] md:max-w-[283px] min-h-[377px] md:h-[326px] group">
+              <div className="relative w-full max-w-[328px] md:min-w-[283px] md:max-w-[283px] min-h-[377px] md:h-[326px] group">
                 <Image
                   src={p.image}
                   alt={p.alt}

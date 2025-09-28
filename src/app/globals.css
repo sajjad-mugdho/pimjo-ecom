@@ -114,6 +114,13 @@
   );
 }
 
+/* Apply our font variable to the html root so the font is inherited globally
+   and components don't need to include `font-sans` manually. The
+   `--font-sans` variable defined in @theme inline points to --font-dm-sans */
+html {
+  font-family: var(--font-sans, var(--font-dm-sans));
+}
+
 .dark {
   --background: #1d2939;
   --foreground: #fff;

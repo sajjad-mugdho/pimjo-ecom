@@ -3,8 +3,6 @@ import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/ui/Navbar";
 import Footer from "../components/ui/Footer";
-import Container from "../components/ui/Container";
-import { ThemeProvider } from "@/components/theme-provider";
 
 const dm_sans = DM_Sans({
   subsets: ["latin"],
@@ -24,10 +22,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${dm_sans.variable} antialiased bg-white dark:bg-black`}
-      >
+    <html lang="en" className={dm_sans.variable}>
+      <body className={`antialiased bg-white dark:bg-black`}>
         <Navbar />
         {children}
         <Footer />

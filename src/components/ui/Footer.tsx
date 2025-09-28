@@ -689,7 +689,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col-reverse md:flex-row items-center min-h-[50px]  justify-between gap-4 max-w-[1200px] mx-auto mt-5 leading-6   text-[16px] text-[#6B7280]">
+      <div className="flex flex-col-reverse md:flex-row items-center min-h-[50px] bg-white  justify-between gap-4 max-w-[1200px] mx-auto mt-5 leading-6   text-[16px] text-[#6B7280]">
         <div className="">
           <div className="">© Copyright 2025 - TailGrids</div>
         </div>
