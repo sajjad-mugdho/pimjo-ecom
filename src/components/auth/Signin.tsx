@@ -9,10 +9,12 @@ const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
+    setError("");
     try {
       const res = await fetch(`/api/auth/signin`, {
         method: "POST",
@@ -20,10 +22,15 @@ const Signin = () => {
         body: JSON.stringify({ email, password }),
       });
       const json = await res.json();
-      // handle response (redirect, show error, etc.)
-      console.log("signin response", json);
+      if (res.ok) {
+        // successful login -> go to dashboard
+        window.location.href = "/dashboard";
+      } else {
+        setError(json?.error || "Invalid credentials");
+      }
     } catch (err) {
       console.error(err);
+      setError("An unexpected error occurred");
     } finally {
       setLoading(false);
     }
@@ -187,6 +194,11 @@ const Signin = () => {
               {loading ? "Signing in..." : "Sign in"}
             </Button>
           </div>
+          {error && (
+            <p className="text-sm text-red-600 mt-2" role="alert">
+              {error}
+            </p>
+          )}
           <span className="text-[16px] text-[#6B7280] leading-6">
             Don’t Have an account ?
             <Link
