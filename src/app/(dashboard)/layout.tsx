@@ -1,0 +1,22 @@
+import React from "react";
+import Sidebar from "@/components/dashboard/Sidebar";
+import DashboardHeader from "@/components/dashboard/DashboardHeader";
+
+export const revalidate = 0;
+
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="min-h-screen flex bg-white text-gray-800">
+      <Sidebar />
+
+      <div className="flex-1 flex flex-col min-h-screen bg-white">
+        <DashboardHeader />
+        <main className="flex-1 overflow-auto p-6 bg-white">{children}</main>
+      </div>
+    </div>
+  );
+}
