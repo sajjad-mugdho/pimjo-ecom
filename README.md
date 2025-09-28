@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pimjo E‑commerce (Next.js App Router)
 
-## Getting Started
+Live demo: https://pimjo-ecom-dusky.vercel.app/
 
-First, run the development server:
+---
+
+## Prerequisites
+
+- Node.js 18+ or later (recommended 18.x or 20.x).
+- npm, yarn, or pnpm as the package manager.
+- Git (to clone the repository).
+
+Verify Node.js and npm are inKeep it short: this repo is a working submission for the assignment - Landing Page, Auth, Dashboard + APIs.stalled:
+
+```bash
+node -v
+npm -v
+```
+
+---
+
+## Quick start (development)
+
+1. Clone and install
+
+```bash
+git clone <repo-url>
+cd ecom-pimjo
+npm install
+```
+
+2. Run
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Visit
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- http://localhost:3000 — landing
+- http://localhost:3000/sign-in — login
+- http://localhost:3000/dashboard — dashboard (protected)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Auth (dev-only)
 
-## Learn More
+- Allowed credentials: `admin@example.com` / `admin123` (hard-coded)
+- Sign-in endpoint: `POST /api/auth/signin` — sets httpOnly cookie `token` (1 hour)
+- Sign-out endpoint: `POST /api/auth/signout` — clears cookie
 
-To learn more about Next.js, take a look at the following resources:
+# Pimjo E‑commerce — FED25 assignment (short)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Mini eCommerce: Landing page (Tailwind), simple auth, and a protected dashboard backed by in-app mock APIs.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Quick start
 
-## Deploy on Vercel
+```bash
+git clone <repo-url>
+cd ecom-pimjo
+npm install
+npm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Open: http://localhost:3000 (landing) — /sign-in (login) — /dashboard (protected)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Auth (dev)
+
+- Use: admin@example.com / admin123
+- POST /api/auth/signin (sets httpOnly cookie `token`) — POST /api/auth/signout (clears it)
+
+Dashboard APIs (mock)
+
+- GET /api/products
+- GET /api/orders
+- GET /api/stats
+
+Scripts
+
+- `npm run dev`, `npm run build`, `npm start`, `npm run lint`
+
+Notes
+
+- Images in `public/` should be referenced with a leading slash (for `next/image`).
+- The auth token is a demo base64 string — replace with NextAuth or a proper session for production.
+
+Want me to: add CRUD APIs, persist sidebar state, or convert auth to NextAuth? Say which and I'll open a branch.
