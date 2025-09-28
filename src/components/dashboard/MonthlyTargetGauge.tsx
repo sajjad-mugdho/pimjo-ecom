@@ -24,7 +24,7 @@ const MonthlyTargetGauge = () => {
             <h3 className="text-lg  font-semibold leading-7 text-[#1D2939]">
               Monthly Target
             </h3>
-            <p className="text-sm leading-5 text-[#667085] leading-6 mt-1">
+            <p className="text-sm leading-5 text-[#667085]  mt-1">
               Target you&apos;ve set for each month
             </p>
           </div>

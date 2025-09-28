@@ -2,6 +2,8 @@ import React from "react";
 import MonthlySalesChart from "./MonthlySalesChart";
 import MonthlyTargetGauge from "./MonthlyTargetGauge";
 import StatisticsCard from "./StatisticsCard";
+import DemographicCard from "./DemographicCard";
+import RecentOrdersCard from "./OrderTable";
 
 const DashboardMain = () => {
   return (
@@ -129,6 +131,16 @@ const DashboardMain = () => {
       {/* analytics section */}
       <div className="">
         <StatisticsCard />
+      </div>
+      <div className="flex flex-col lg:flex-row gap-6">
+        {/*customer demographic  */}
+        <div className="">
+          <DemographicCard />
+        </div>
+        {/*  recent orders*/}
+        <div className="">
+          <RecentOrdersCard />
+        </div>
       </div>
     </section>
   );

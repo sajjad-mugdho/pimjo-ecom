@@ -40,7 +40,7 @@ export default function StatisticsCard() {
 
   // control styles
   const tabBase =
-    "px-3 py-1 rounded-lg text-sm transition-colors select-none cursor-pointer";
+    "px-3 py-1 rounded-lg h-11 text-sm transition-colors select-none cursor-pointer";
   const activeTabCls = "bg-white text-gray-800 shadow-md font-medium"; // active button
   const inactiveTabCls = "text-gray-500";
 
@@ -49,15 +49,17 @@ export default function StatisticsCard() {
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div>
-          <h2 className="text-2xl font-bold text-gray-900">Statistics</h2>
-          <p className="text-sm text-gray-500 mt-1">
-            Target you&apos;ve set for each month
+          <h3 className="text-lg  font-semibold leading-7 text-[#1D2939]">
+            Statistics
+          </h3>
+          <p className="text-sm leading-5 text-[#667085] mt-1">
+            Target you’ve set for each month
           </p>
         </div>
 
         <div className="flex items-center space-x-3">
           {/* Segmented control */}
-          <div className="bg-gray-100 rounded-lg p-1 flex items-center">
+          <div className="bg-gray-50 h-11 rounded-lg  flex items-center">
             <button
               onClick={() => setActiveTab("Overview")}
               className={`${tabBase} ${
@@ -85,25 +87,27 @@ export default function StatisticsCard() {
           </div>
 
           {/* Date range button */}
-          <button className="inline-flex items-center gap-2 px-3 py-1 rounded-md border border-gray-300 text-sm text-gray-700 hover:bg-gray-50">
+          <button className="inline-flex items-center h-11 gap-2 px-3 py-1 rounded-[8px] border border-[#D0D5DD] text-sm text-gray-700 hover:bg-gray-50">
             {/* calendar icon (inline SVG) */}
             <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              className="text-gray-500"
             >
               <path
-                d="M7 11H9M7 15H17M7 7H17M7 7V5M17 7V5M3 9V20H21V9"
-                stroke="#6B7280"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                d="M6.66671 2.29169V3.75002M13.3334 2.29169V3.75002M3.33337 7.50002H16.6667M4.58337 17.0834H15.4167C16.1071 17.0834 16.6667 16.5237 16.6667 15.8334V5.00002C16.6667 4.30966 16.1071 3.75002 15.4167 3.75002H4.58337C3.89302 3.75002 3.33337 4.30966 3.33337 5.00002V15.8334C3.33337 16.5237 3.89302 17.0834 4.58337 17.0834Z"
+                stroke="#344054"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               />
             </svg>
-            <span>05 Feb - 06 March</span>
+
+            <span className="leading-5 text-sm font-medium text-[#344054]">
+              05 Feb - 06 March
+            </span>
           </button>
         </div>
       </div>

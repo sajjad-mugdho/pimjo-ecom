@@ -20,7 +20,7 @@ export default function DashboardHeader() {
   const [profileOpen, setProfileOpen] = useState(false);
 
   return (
-    <header className="h-16 flex items-center px-6 my-4 border-b border-gray-200 bg-white">
+    <header className="h-16 flex items-center px-6 py-4 border-b border-gray-200 bg-white">
       <div className="flex items-center gap-3">
         <button
           type="button"
