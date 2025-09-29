@@ -3,6 +3,7 @@ import { DM_Sans } from "next/font/google";
 import "./globals.css";
 import NavbarWrapper from "../components/ui/NavbarWrapper";
 import FooterWrapper from "../components/ui/FooterWrapper";
+import { Toaster } from "react-hot-toast";
 
 const dm_sans = DM_Sans({
   subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({
       <body className={`antialiased bg-white dark:bg-black`}>
         <NavbarWrapper />
         {children}
+        <Toaster />
         <FooterWrapper />
       </body>
     </html>

@@ -1,6 +1,7 @@
 import type { Product, Order, StatsSummary } from "@/types";
 
-export const mockProducts: Product[] = [
+// Start with a handful of hand-crafted products, then generate more so we have 30+ items
+const seedProducts: Product[] = [
   {
     id: 1,
     name: "Macbook Pro 13",
@@ -42,6 +43,39 @@ export const mockProducts: Product[] = [
     image: "/images/product-5.jpg",
   },
 ];
+
+// Generate additional products programmatically so we have 30+ items for pagination/testing
+const generated: Product[] = [];
+const categories = [
+  "Laptop",
+  "Smartphone",
+  "Tablet",
+  "Headphones",
+  "Accessories",
+  "Camera",
+  "Watch",
+];
+const imgs = [
+  "/images/product-1.jpg",
+  "/images/product-2.jpg",
+  "/images/product-3.jpg",
+  "/images/product-4.jpg",
+  "/images/product-5.jpg",
+];
+
+for (let i = 6; i <= 35; i++) {
+  const base = i % 5;
+  generated.push({
+    id: i,
+    name: `Product ${i} ${i % 2 === 0 ? "Pro" : "Air"}`,
+    price: Math.round((50 + i * 37) % 1500),
+    stock: (i * 3) % 40,
+    category: categories[i % categories.length],
+    image: imgs[base],
+  });
+}
+
+export const mockProducts: Product[] = [...seedProducts, ...generated];
 
 export const mockOrders: Order[] = [
   {
