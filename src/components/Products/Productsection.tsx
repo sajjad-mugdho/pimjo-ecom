@@ -62,7 +62,6 @@ const Productsection: React.FC = () => {
     return () => document.removeEventListener("mousedown", onDoc);
   }, [filterOpen]);
 
-  // close per-row menu when clicking outside
   useEffect(() => {
     function onDoc(e: MouseEvent) {
       if (menuOpenId == null) return;
@@ -245,16 +244,19 @@ const Productsection: React.FC = () => {
     <section className="w-full bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm">
       <Toaster />
       <div className="flex items-center justify-between gap-4 border-b border-gray-100 pb-4">
-        <h2 className="text-lg font-semibold p-2">All products</h2>
+        <h2 className="hidden sm:block text-lg font-semibold p-2">
+          All products
+        </h2>
 
         <div className="flex items-center gap-3">
           <button
             onClick={openCreate}
             className="inline-flex items-center gap-2 h-11 px-4 rounded-lg border border-primary-400 bg-[#3758F9] text-white text-sm hover:brightness-95"
           >
-            + Add product
+            <span className="hidden sm:block ">+ Add product</span>
+            <span className="sm:hidden">+</span>
           </button>
-          <div className="relative w-[420px]">
+          <div className="relative max-w-[216px] md:max-w-[420px] w-full ">
             <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
               <svg
                 className="w-5 h-5 text-slate-400"
@@ -301,7 +303,7 @@ const Productsection: React.FC = () => {
                 <line x1="8" y1="2" x2="8" y2="6"></line>
                 <line x1="3" y1="10" x2="21" y2="10"></line>
               </svg>
-              <span>05 Feb – 06 March</span>
+              <span className="hidden sm:block">05 Feb – 06 March</span>
             </button>
 
             {filterOpen && (
@@ -324,7 +326,7 @@ const Productsection: React.FC = () => {
       </div>
 
       <div className="overflow-x-auto mt-4">
-        <table className="w-full table-auto">
+        <table className="w-full min-w-[700px] table-auto">
           <thead className="text-left text-xs text-[#667085]">
             <tr>
               <th className="min-w-[220px] px-3 py-3 font-medium">Products</th>
@@ -339,7 +341,7 @@ const Productsection: React.FC = () => {
             {pageItems.length === 0 ? (
               <tr>
                 <td
-                  colSpan={4}
+                  colSpan={5}
                   className="px-3 py-10 text-center text-sm text-slate-500"
                 >
                   No products found.
@@ -399,7 +401,7 @@ const Productsection: React.FC = () => {
                           onClick={() =>
                             setMenuOpenId(menuOpenId === p.id ? null : p.id)
                           }
-                          className="w-8 h-8 inline-flex items-center justify-center rounded-md border border-gray-100 bg-white text-slate-600 hover:bg-gray-50"
+                          className="w-8 h-8 inline-flex items-center justify-center rounded-md  bg-white text-slate-600 hover:bg-gray-50"
                           title="Actions"
                         >
                           {/* three dots vertical */}

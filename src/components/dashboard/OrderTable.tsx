@@ -61,7 +61,7 @@ const OrderTable = () => {
 
   if (loading) {
     return (
-      <section className="max-w-[665px] md:w-[665px] w-full h-[200px] bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm flex items-center justify-center">
+      <section className="w-[328px] md:max-w-[665px] md:w-[665px] h-[200px] bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm flex items-center justify-center">
         <div className="text-sm text-gray-500">Loading orders…</div>
       </section>
     );
@@ -69,7 +69,7 @@ const OrderTable = () => {
 
   if (error) {
     return (
-      <section className="max-w-[665px] md:w-[665px] w-full h-[200px] bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm flex items-center justify-center">
+      <section className="w-[328px] md:max-w-[665px] md:w-[665px] h-[200px] bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm flex items-center justify-center">
         <div className="text-sm text-red-600">
           Error loading orders: {error}
         </div>
@@ -78,14 +78,14 @@ const OrderTable = () => {
   }
 
   return (
-    <section className="max-w-[665px] md:w-[665px] w-full h-[463px] bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm">
-      <div className="flex items-center h-[76px] justify-between border-b border-gray-200">
-        <h2 className="text-lg font-semibold p-6">Recent Orders</h2>
-        <div className="flex items-center gap-5 justify-center">
+    <section className="w-[328px] md:max-w-[665px] md:w-[665px] min-h-[463px] bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm">
+      <div className="flex flex-col md:flex-row md:items-center items-start min-h-[76px] justify-between border-b border-gray-200">
+        <h2 className="text-lg font-semibold p-4 md:p-6">Recent Orders</h2>
+        <div className="flex items-center gap-3 md:gap-5 justify-center md:justify-end overflow-x-auto pb-2 md:pb-0">
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setFilterOpen((v) => !v)}
-              className="inline-flex items-center h-11 gap-2 px-3 py-1 rounded-[8px] border border-[#D0D5DD] text-sm text-gray-700 hover:bg-gray-50 ml-6 mb-4"
+              className="inline-flex items-center h-11 gap-2 px-3 py-1 rounded-[8px] border border-[#D0D5DD] text-sm text-gray-700 hover:bg-gray-50"
             >
               <svg
                 width="20"
@@ -151,26 +151,26 @@ const OrderTable = () => {
             )}
           </div>
 
-          <button className="inline-flex items-center h-11 gap-2 px-3 py-1 rounded-[8px] border border-[#D0D5DD] text-sm text-gray-700 hover:bg-gray-50 ml-2 mb-4">
+          <button className="inline-flex items-center h-11 gap-2 px-3 py-1 rounded-[8px] border border-[#D0D5DD] text-sm text-gray-700 hover:bg-gray-50">
             See all
           </button>
         </div>
       </div>
 
-      <div className=" overflow-x-auto">
-        <table className="w-full  table-auto">
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[500px] table-auto">
           <thead className="my-2">
             <tr>
-              <th className="min-w-[100px] text-left text-xs text-[#667085] font-medium px-3 py-2">
+              <th className="min-w-[150px] text-left text-xs text-[#667085] font-medium px-3 py-2">
                 Product
               </th>
-              <th className="text-left text-xs text-[#667085] font-medium px-3 py-2">
+              <th className="min-w-[100px] text-left text-xs text-[#667085] font-medium px-3 py-2">
                 Category
               </th>
-              <th className="text-left text-xs text-[#667085] font-medium px-3 py-2">
+              <th className="min-w-[80px] text-left text-xs text-[#667085] font-medium px-3 py-2">
                 Price
               </th>
-              <th className="text-left text-xs text-[#667085] font-medium px-3 py-2">
+              <th className="min-w-[100px] text-left text-xs text-[#667085] font-medium px-3 py-2">
                 Status
               </th>
             </tr>
@@ -178,7 +178,7 @@ const OrderTable = () => {
           <tbody>
             {filtered.map((order) => (
               <tr key={order.id} className="border-t border-gray-100">
-                <td className="font-medium flex items-center gap-3 px-3 py-2">
+                <td className="font-medium flex items-center gap-3 px-3 py-2 min-w-[150px]">
                   <Image
                     src={order.image}
                     alt={order.product}
@@ -192,13 +192,13 @@ const OrderTable = () => {
                     </p>
                   </div>
                 </td>
-                <td className="text-sm text-[#667085] px-3 py-2">
+                <td className="text-sm text-[#667085] px-3 py-2 min-w-[100px]">
                   {order.category}
                 </td>
-                <td className="text-sm text-[#667085] px-3 py-2">
+                <td className="text-sm text-[#667085] px-3 py-2 min-w-[80px]">
                   {order.price}
                 </td>
-                <td className="px-3 py-2">
+                <td className="px-3 py-2 min-w-[100px]">
                   {order.status === "Delivered" ? (
                     <div className="w-[70px] h-[22px] flex items-center justify-center">
                       <svg

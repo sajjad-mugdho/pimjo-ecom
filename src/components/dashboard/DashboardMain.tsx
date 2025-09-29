@@ -39,8 +39,8 @@ const DashboardMain = () => {
       {/* left section */}
       <div className="">
         {/* upper 2 sections */}
-        <div className="flex items-center justify-center gap-6 mb-6">
-          <div className="min-w-[300px] h-[180px] p-6 bg-white rounded-2xl shadow-sm">
+        <div className="flex  flex-col md:flex-row items-center justify-center gap-6 mb-6">
+          <div className="min-w-[300px] w-[328px] md:w-[302px] h-[180px] p-6 bg-white rounded-2xl shadow-sm">
             <div className="w-12 h-12 bg-gray-100 flex items-center justify-center rounded-lg mb-6 ">
               <svg
                 width="24"
@@ -93,7 +93,7 @@ const DashboardMain = () => {
               </div>
             </div>
           </div>
-          <div className="min-w-[300px] h-[180px] p-6 bg-white rounded-2xl shadow-sm">
+          <div className="min-w-[300px] w-[328px] md:w-[302px] h-[180px] p-6 bg-white rounded-2xl shadow-sm">
             <div className="w-12 h-12 bg-gray-100 flex items-center justify-center rounded-lg mb-6 ">
               <svg
                 width="20"

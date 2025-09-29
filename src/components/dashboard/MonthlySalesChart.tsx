@@ -38,10 +38,10 @@ export default function MonthlySalesChart({ data, loading }: Props) {
   }
 
   return (
-    <div className="w-full md:w-[628px] md:h-[288px] bg-white rounded-xl p-6 shadow-sm">
+    <div className="w-[328px] md:w-[628px] md:min-h-[288px] bg-white rounded-xl p-6 shadow-sm overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg  font-semibold leading-7 text-[#1D2939]">
+        <h3 className="text-lg font-semibold leading-7 text-[#1D2939]">
           Monthly Sales
         </h3>
 
@@ -49,7 +49,6 @@ export default function MonthlySalesChart({ data, loading }: Props) {
           aria-label="More"
           className="inline-flex items-center justify-center h-8 w-8 rounded-full hover:bg-gray-100 text-[#667085]"
         >
-          {/* MoreVertical icon (three dots vertical) */}
           <svg
             width="16"
             height="16"
@@ -68,7 +67,7 @@ export default function MonthlySalesChart({ data, loading }: Props) {
       {/* Chart area */}
       <div className="flex h-[200px]">
         {/* Y axis labels */}
-        <div className="w-12 flex flex-col justify-between items-end pr-3">
+        <div className="w-12 flex flex-col justify-between items-end pr-3 flex-shrink-0">
           {[800, 600, 400, 200, 0].map((label) => (
             <span key={label} className="text-xs text-gray-400">
               {label}
@@ -77,11 +76,9 @@ export default function MonthlySalesChart({ data, loading }: Props) {
         </div>
 
         {/* Bars + grid */}
-        <div className="flex-1 relative">
-          {/* horizontal grid lines (4 lines for 200/400/600/800) */}
+        <div className="flex-1 relative min-w-0">
           <div className="absolute inset-0 pointer-events-none">
             <div className="h-full flex flex-col justify-between">
-              {/* top line (800) */}
               <div className="border-t border-gray-100" />
               <div className="border-t border-gray-100" />
               <div className="border-t border-gray-100" />
@@ -90,9 +87,8 @@ export default function MonthlySalesChart({ data, loading }: Props) {
             </div>
           </div>
 
-          {/* Bars container */}
           <div className="relative h-full flex flex-col justify-end">
-            <div className="flex items-end h-[160px] gap-2 w-full">
+            <div className="flex items-end h-[180px] gap-2 w-full overflow-x-auto flex-nowrap md:overflow-visible">
               {/* bar area height */}
               {salesData.map((d: DataPoint) => {
                 const percent = Math.max(
@@ -103,9 +99,8 @@ export default function MonthlySalesChart({ data, loading }: Props) {
                 return (
                   <div
                     key={d.month}
-                    className="flex-1 flex flex-col items-center"
+                    className="flex flex-col items-center w-10 md:flex-1 flex-shrink-0"
                   >
-                    {/* fixed-height bar container so percentage heights work reliably */}
                     <div className="h-[160px] w-full flex items-end justify-center">
                       <div
                         role="button"

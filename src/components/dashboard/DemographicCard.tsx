@@ -102,13 +102,13 @@ const customerData: CustomerItem[] = [
 export default function DemographicCard() {
   return (
     <article
-      className="bg-white rounded-2xl shadow-sm p-6 w-full max-w-[420px] sm:w-[413px] sm:h-[463px] flex flex-col"
+      className="bg-white rounded-2xl shadow-sm p-4 sm:p-6 w-[328px] sm:w-[413px] min-h-[420px] sm:h-[463px] flex flex-col"
       aria-labelledby="demographic-title"
     >
       {/* Header */}
       <header className="flex items-start justify-between">
         <div>
-          <h3 className="text-lg  font-semibold leading-7 text-[#1D2939]">
+          <h3 className="text-lg font-semibold leading-7 text-[#1D2939]">
             Customer Demographics
           </h3>
           <p className="text-sm leading-5 text-[#667085] mt-1">
@@ -136,8 +136,8 @@ export default function DemographicCard() {
       </header>
 
       {/* Map */}
-      <div className="mt-5 bg-[#F9FAFB] rounded-xl border border-[#E4E7EC] p-4 flex-shrink-0">
-        <div className="relative w-full h-[170px]  rounded-lg overflow-hidden">
+      <div className="mt-5 bg-[#F9FAFB] rounded-xl border border-[#E4E7EC] p-3 sm:p-4 flex-shrink-0">
+        <div className="relative w-full h-[140px] sm:h-[170px] rounded-lg overflow-hidden">
           <Image
             src="/map.svg"
             alt="World map"
@@ -151,21 +151,20 @@ export default function DemographicCard() {
       <div className="mt-5 space-y-4 flex-1 overflow-auto">
         {customerData.map((item) => (
           <div key={item.country} className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="text-2xl">{item.flagEmoji}</div>
-              <div>
-                <div className="text-sm font-semibold text-gray-900">
+            <div className="flex items-center justify-center gap-2 sm:gap-3">
+              <div className="w-6 h-6 mx-2 sm:w-8 sm:h-8">{item.flagEmoji}</div>
+              <div className="min-w-0">
+                <div className="text-sm font-semibold text-gray-900 truncate">
                   {item.country}
                 </div>
-                <div className="text-xs text-gray-500 mt-1">
+                <div className="text-xs text-gray-500 truncate">
                   {item.customers.toLocaleString()} Customers
                 </div>
               </div>
             </div>
 
             <div className="flex items-center gap-2">
-              {/* progress bar */}
-              <div className="w-[98px] ">
+              <div className="w-20 sm:w-[98px]">
                 <div className="bg-gray-200 rounded-full h-2 overflow-hidden">
                   <div
                     className="h-2 rounded-full bg-[#3758F9]"
@@ -176,7 +175,7 @@ export default function DemographicCard() {
                 </div>
               </div>
 
-              <div className="w-12 text-right">
+              <div className="w-10 sm:w-12 text-right">
                 <span className="text-sm font-normal text-gray-800">
                   {item.percentage}%
                 </span>

@@ -183,7 +183,7 @@ export default function NotificationsPanel({
           width: 4px;
         }
         .notifications-scroll::-webkit-scrollbar-thumb {
-          background: #9ca3af;
+          background: #e4e7ec;
           border-radius: 999px;
         }
         .notifications-scroll::-webkit-scrollbar-track {

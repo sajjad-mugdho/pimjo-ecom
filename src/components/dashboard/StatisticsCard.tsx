@@ -53,7 +53,7 @@ export default function StatisticsCard({ stats, loading, error }: Props) {
 
   if (loading) {
     return (
-      <div className="w-full md:w-[1100px] h-[200px] bg-white rounded-2xl shadow-sm p-6 flex items-center justify-center">
+      <div className="w-[328px] md:w-[1100px] h-[200px] bg-white rounded-2xl shadow-sm p-6 flex items-center justify-center">
         <div className="text-sm text-gray-500">Loading statistics…</div>
       </div>
     );
@@ -61,7 +61,7 @@ export default function StatisticsCard({ stats, loading, error }: Props) {
 
   if (error) {
     return (
-      <div className="w-full md:w-[1100px] h-[200px] bg-white rounded-2xl shadow-sm p-6 flex items-center justify-center">
+      <div className="w-[328px] md:w-[1100px] h-[200px] bg-white rounded-2xl shadow-sm p-6 flex items-center justify-center">
         <div className="text-sm text-red-600">{error}</div>
       </div>
     );
@@ -76,21 +76,21 @@ export default function StatisticsCard({ stats, loading, error }: Props) {
     : data;
 
   return (
-    <div className="w-full md:w-[1100px] h-[400px] bg-white rounded-2xl shadow-sm p-6">
+    <div className="w-[328px] md:w-[1100px] min-h-[400px] bg-white rounded-2xl shadow-sm p-6 overflow-hidden">
       {/* Header */}
-      <div className="flex items-start justify-between mb-4">
+      <div className="flex flex-col md:flex-row items-start gap-y-4 md:gap-y-0 justify-between mb-4">
         <div>
-          <h3 className="text-lg  font-semibold leading-7 text-[#1D2939]">
+          <h3 className="text-lg font-semibold leading-7 text-[#1D2939]">
             Statistics
           </h3>
           <p className="text-sm leading-5 text-[#667085] mt-1">
-            Target you’ve set for each month
+            Target you&apos;ve set for each month
           </p>
         </div>
 
         <div className="flex items-center space-x-3">
           {/* Segmented control */}
-          <div className="bg-gray-50 h-11 rounded-lg  flex items-center">
+          <div className="bg-gray-50 h-11 rounded-lg flex items-center">
             <button
               onClick={() => setActiveTab("Overview")}
               className={`${tabBase} ${
@@ -136,7 +136,7 @@ export default function StatisticsCard({ stats, loading, error }: Props) {
               />
             </svg>
 
-            <span className="leading-5 text-sm font-medium text-[#344054]">
+            <span className="hidden md:block leading-5 text-sm font-medium text-[#344054]">
               05 Feb - 06 March
             </span>
           </button>
@@ -144,82 +144,84 @@ export default function StatisticsCard({ stats, loading, error }: Props) {
       </div>
 
       {/* Chart area */}
-      <div className="w-full h-[300px]">
-        <ResponsiveContainer width="100%" height="100%">
-          <AreaChart
-            data={chartData}
-            margin={{ top: 10, right: 32, left: 0, bottom: 0 }}
-          >
-            {/* Gradients for areas */}
-            <defs>
-              <linearGradient id="colorTarget" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#4F46E5" stopOpacity={0.18} />
-                <stop offset="95%" stopColor="#4F46E5" stopOpacity={0.02} />
-              </linearGradient>
-              <linearGradient id="colorActual" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#A5B4FC" stopOpacity={0.16} />
-                <stop offset="95%" stopColor="#A5B4FC" stopOpacity={0.02} />
-              </linearGradient>
-            </defs>
+      <div className="w-full h-[300px] overflow-x-auto md:overflow-visible">
+        <div className="min-w-[1100px] md:w-full ml-2 h-full">
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart
+              data={chartData}
+              margin={{ top: 10, right: 32, left: 0, bottom: 0 }}
+            >
+              {/* Gradients for areas */}
+              <defs>
+                <linearGradient id="colorTarget" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#4F46E5" stopOpacity={0.18} />
+                  <stop offset="95%" stopColor="#4F46E5" stopOpacity={0.02} />
+                </linearGradient>
+                <linearGradient id="colorActual" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#A5B4FC" stopOpacity={0.16} />
+                  <stop offset="95%" stopColor="#A5B4FC" stopOpacity={0.02} />
+                </linearGradient>
+              </defs>
 
-            {/* Grid: horizontal lines only */}
-            <CartesianGrid
-              horizontal={true}
-              vertical={false}
-              stroke="#F3F4F6"
-            />
+              {/* Grid: horizontal lines only */}
+              <CartesianGrid
+                horizontal={true}
+                vertical={false}
+                stroke="#F3F4F6"
+              />
 
-            {/* Y Axis with ticks 0..1000 (6 ticks) */}
-            <YAxis
-              domain={[0, 1000]}
-              tickCount={6}
-              tick={{ fill: "#9CA3AF", fontSize: 12 }}
-              axisLine={false}
-              tickLine={false}
-              width={48}
-            />
+              {/* Y Axis with ticks 0..1000 (6 ticks) */}
+              <YAxis
+                domain={[0, 1000]}
+                tickCount={6}
+                tick={{ fill: "#9CA3AF", fontSize: 12 }}
+                axisLine={false}
+                tickLine={false}
+                width={48}
+              />
 
-            {/* X Axis months */}
-            <XAxis
-              dataKey="month"
-              tick={{ fill: "#9CA3AF", fontSize: 12 }}
-              axisLine={false}
-              tickLine={false}
-              padding={{ left: 10, right: 10 }}
-              interval={0}
-            />
+              {/* X Axis months */}
+              <XAxis
+                dataKey="month"
+                tick={{ fill: "#9CA3AF", fontSize: 12 }}
+                axisLine={false}
+                tickLine={false}
+                padding={{ left: 10, right: 10 }}
+                interval={0}
+              />
 
-            {/* Tooltip (custom styling left as default) */}
-            <Tooltip
-              contentStyle={{ borderRadius: 8, border: "none" }}
-              itemStyle={{ color: "#111827" }}
-            />
+              {/* Tooltip (custom styling left as default) */}
+              <Tooltip
+                contentStyle={{ borderRadius: 8, border: "none" }}
+                itemStyle={{ color: "#111827" }}
+              />
 
-            {/* Areas */}
-            <Area
-              type="monotone"
-              dataKey="TargetValue"
-              stroke="#4F46E5"
-              strokeWidth={3}
-              fill="url(#colorTarget)"
-              fillOpacity={1}
-              dot={false}
-              activeDot={{ r: 4 }}
-              isAnimationActive={true}
-            />
+              {/* Areas */}
+              <Area
+                type="monotone"
+                dataKey="TargetValue"
+                stroke="#4F46E5"
+                strokeWidth={3}
+                fill="url(#colorTarget)"
+                fillOpacity={1}
+                dot={false}
+                activeDot={{ r: 4 }}
+                isAnimationActive={true}
+              />
 
-            <Area
-              type="monotone"
-              dataKey="ActualValue"
-              stroke="#A5B4FC"
-              strokeWidth={2}
-              fill="url(#colorActual)"
-              fillOpacity={1}
-              dot={false}
-              isAnimationActive={true}
-            />
-          </AreaChart>
-        </ResponsiveContainer>
+              <Area
+                type="monotone"
+                dataKey="ActualValue"
+                stroke="#A5B4FC"
+                strokeWidth={2}
+                fill="url(#colorActual)"
+                fillOpacity={1}
+                dot={false}
+                isAnimationActive={true}
+              />
+            </AreaChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     </div>
   );
