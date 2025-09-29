@@ -5,7 +5,7 @@ type DataPoint = { month: string; sales: number };
 
 const MAX_SALES = 800;
 
-const salesData: DataPoint[] = [
+const DEFAULT_SALES: DataPoint[] = [
   { month: "Jan", sales: 500 },
   { month: "Feb", sales: 750 },
   { month: "Mar", sales: 400 }, // highlighted
@@ -20,11 +20,25 @@ const salesData: DataPoint[] = [
   { month: "Dec", sales: 450 },
 ];
 
-export default function MonthlySalesChart() {
+type Props = {
+  data?: { month: string; sales: number }[];
+  loading?: boolean;
+};
+
+export default function MonthlySalesChart({ data, loading }: Props) {
   const [selectedMonth, setSelectedMonth] = useState<string>("Mar");
+  const salesData = data && data.length ? data : DEFAULT_SALES;
+
+  if (loading) {
+    return (
+      <div className="w-full md:w-[628px] md:h-[288px] bg-white rounded-xl p-6 shadow-sm">
+        <div className="text-sm text-gray-500">Loading chart…</div>
+      </div>
+    );
+  }
 
   return (
-    <div className="w-full md:w-[628px] md:h-[288px] bg-white rounded-xl p-6 shadow-lg">
+    <div className="w-full md:w-[628px] md:h-[288px] bg-white rounded-xl p-6 shadow-sm">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg  font-semibold leading-7 text-[#1D2939]">
@@ -80,7 +94,7 @@ export default function MonthlySalesChart() {
           <div className="relative h-full flex flex-col justify-end">
             <div className="flex items-end h-[160px] gap-2 w-full">
               {/* bar area height */}
-              {salesData.map((d) => {
+              {salesData.map((d: DataPoint) => {
                 const percent = Math.max(
                   0,
                   Math.min(100, (d.sales / MAX_SALES) * 100)

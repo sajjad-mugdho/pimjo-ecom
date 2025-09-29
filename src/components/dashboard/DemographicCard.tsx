@@ -102,7 +102,7 @@ const customerData: CustomerItem[] = [
 export default function DemographicCard() {
   return (
     <article
-      className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-[420px] sm:w-[413px] sm:h-[463px] flex flex-col"
+      className="bg-white rounded-2xl shadow-sm p-6 w-full max-w-[420px] sm:w-[413px] sm:h-[463px] flex flex-col"
       aria-labelledby="demographic-title"
     >
       {/* Header */}

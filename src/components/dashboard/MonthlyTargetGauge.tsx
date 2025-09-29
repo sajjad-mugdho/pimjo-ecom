@@ -1,7 +1,30 @@
 import React from "react";
+import type { StatsSummary } from "@/types";
 
-const MonthlyTargetGauge = () => {
-  const progress = 0.7555; // 75.55%
+type Props = {
+  summary?: StatsSummary | null;
+  loading?: boolean;
+  error?: string | null;
+};
+
+const MonthlyTargetGauge = ({ summary, loading, error }: Props) => {
+  if (loading) {
+    return (
+      <div className="w-[450px] h-[200px] bg-white rounded-3xl shadow-sm flex items-center justify-center">
+        <div className="text-sm text-gray-500">Loading target…</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="w-[450px] h-[200px] bg-white rounded-3xl shadow-sm flex items-center justify-center">
+        <div className="text-sm text-red-600">{error}</div>
+      </div>
+    );
+  }
+
+  const progress = summary ? Math.min(1, summary.revenue / 20000) : 0.7555; // fallback
 
   // SVG geometry
   const r = 110; // radius
@@ -12,7 +35,7 @@ const MonthlyTargetGauge = () => {
   const dashOffset = (1 - progress) * semic;
 
   return (
-    <div className="w-[450px] h-[494px] bg-gray-100 rounded-3xl shadow-xl overflow-hidden">
+    <div className="w-[450px] h-[494px] bg-gray-100 rounded-3xl shadow-sm overflow-hidden">
       {/* Top main body ~80% */}
       <div
         className="bg-white p-6 min-h-[402px] rounded-2xl"

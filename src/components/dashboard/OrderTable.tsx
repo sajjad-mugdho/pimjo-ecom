@@ -2,68 +2,16 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { apiGet } from "@/lib/api";
+import type { Order } from "@/types";
 
 const OrderTable = () => {
-  interface Order {
-    id: number;
-    product: string;
-    category: string;
-    status: "Delivered" | "Pending" | "Cancelled";
-    type: string;
-    price: string;
-    image: string;
-  }
-
-  const Orderdata: Order[] = [
-    {
-      id: 1,
-      product: "Macbook Pro 13",
-      category: "Laptop",
-      status: "Delivered",
-      type: "Online",
-      price: "$250.00",
-      image: "/images/product-1.jpg",
-    },
-    {
-      id: 2,
-      product: "Apple iPhone 13",
-      category: "Smartphone",
-      status: "Pending",
-      type: "In-store",
-      price: "$999.00",
-      image: "/images/product-2.jpg",
-    },
-    {
-      id: 3,
-      product: "Sony WH-1000XM4",
-      category: "Headphones",
-      status: "Delivered",
-      type: "Online",
-      price: "$349.00",
-      image: "/images/product-3.jpg",
-    },
-    {
-      id: 4,
-      product: "Dell XPS 15",
-      category: "Laptop",
-      status: "Cancelled",
-      type: "In-store",
-      price: "$1,499.00",
-      image: "/images/product-4.jpg",
-    },
-    {
-      id: 5,
-      product: "Samsung Galaxy S21",
-      category: "Smartphone",
-      status: "Delivered",
-      type: "Online",
-      price: "$799.00",
-      image: "/images/product-5.jpg",
-    },
-  ];
+  const [orders, setOrders] = useState<Order[] | null>(null);
   const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
   const [filterOpen, setFilterOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const toggleStatus = (s: string) => {
     setSelectedStatuses((prev) =>
@@ -73,8 +21,28 @@ const OrderTable = () => {
 
   const filtered =
     selectedStatuses.length > 0
-      ? Orderdata.filter((o) => selectedStatuses.includes(o.status))
-      : Orderdata;
+      ? (orders || []).filter((o) => selectedStatuses.includes(o.status))
+      : orders || [];
+
+  useEffect(() => {
+    let mounted = true;
+    setLoading(true);
+    apiGet<{ items: Order[] }>("/api/orders")
+      .then((res) => {
+        if (!mounted) return;
+        setOrders(res.items);
+        setError(null);
+      })
+      .catch((err) => {
+        if (!mounted) return;
+        setError(err.message || "Failed to load orders");
+      })
+      .finally(() => mounted && setLoading(false));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     function onDoc(e: MouseEvent) {
@@ -91,8 +59,26 @@ const OrderTable = () => {
     return () => document.removeEventListener("mousedown", onDoc);
   }, [filterOpen]);
 
+  if (loading) {
+    return (
+      <section className="max-w-[665px] md:w-[665px] w-full h-[200px] bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm flex items-center justify-center">
+        <div className="text-sm text-gray-500">Loading orders…</div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="max-w-[665px] md:w-[665px] w-full h-[200px] bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm flex items-center justify-center">
+        <div className="text-sm text-red-600">
+          Error loading orders: {error}
+        </div>
+      </section>
+    );
+  }
+
   return (
-    <section className="max-w-[665px] md:w-[665px] w-full h-[463px] bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-md">
+    <section className="max-w-[665px] md:w-[665px] w-full h-[463px] bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm">
       <div className="flex items-center h-[76px] justify-between border-b border-gray-200">
         <h2 className="text-lg font-semibold p-6">Recent Orders</h2>
         <div className="flex items-center gap-5 justify-center">
@@ -120,7 +106,7 @@ const OrderTable = () => {
             </button>
 
             {filterOpen && (
-              <div className="absolute right-0 mt-2 z-50 p-3 bg-white rounded-md shadow-lg border w-40">
+              <div className="absolute right-0 mt-2 z-50 p-3 bg-white rounded-md shadow-sm border w-40">
                 <div className="flex flex-col gap-2">
                   <label className="inline-flex items-center gap-2">
                     <input
@@ -171,9 +157,9 @@ const OrderTable = () => {
         </div>
       </div>
 
-      <div className="mt-4 overflow-x-auto">
-        <table className="w-full table-auto">
-          <thead>
+      <div className=" overflow-x-auto">
+        <table className="w-full  table-auto">
+          <thead className="my-2">
             <tr>
               <th className="min-w-[100px] text-left text-xs text-[#667085] font-medium px-3 py-2">
                 Product
@@ -192,7 +178,7 @@ const OrderTable = () => {
           <tbody>
             {filtered.map((order) => (
               <tr key={order.id} className="border-t border-gray-100">
-                <td className="font-medium flex items-center gap-3 px-3 py-3">
+                <td className="font-medium flex items-center gap-3 px-3 py-2">
                   <Image
                     src={order.image}
                     alt={order.product}
@@ -206,13 +192,13 @@ const OrderTable = () => {
                     </p>
                   </div>
                 </td>
-                <td className="text-sm text-[#667085] px-3 py-3">
+                <td className="text-sm text-[#667085] px-3 py-2">
                   {order.category}
                 </td>
-                <td className="text-sm text-[#667085] px-3 py-3">
+                <td className="text-sm text-[#667085] px-3 py-2">
                   {order.price}
                 </td>
-                <td className="px-3 py-3">
+                <td className="px-3 py-2">
                   {order.status === "Delivered" ? (
                     <div className="w-[70px] h-[22px] flex items-center justify-center">
                       <svg

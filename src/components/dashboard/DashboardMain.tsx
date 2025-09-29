@@ -1,18 +1,46 @@
+"use client";
+
 import React from "react";
+import { apiGet } from "@/lib/api";
+import type { StatsSummary } from "@/types";
+import StatisticsCard from "./StatisticsCard";
 import MonthlySalesChart from "./MonthlySalesChart";
 import MonthlyTargetGauge from "./MonthlyTargetGauge";
-import StatisticsCard from "./StatisticsCard";
 import DemographicCard from "./DemographicCard";
-import RecentOrdersCard from "./OrderTable";
+import OrderTable from "./OrderTable";
 
 const DashboardMain = () => {
+  const [stats, setStats] = React.useState<StatsSummary | null>(null);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState<string | null>(null);
+
+  React.useEffect(() => {
+    let mounted = true;
+    setLoading(true);
+    apiGet<{ summary: StatsSummary }>("/api/stats")
+      .then((res) => {
+        if (!mounted) return;
+        setStats(res.summary);
+        setError(null);
+      })
+      .catch((err) => {
+        if (!mounted) return;
+        setError(err.message || "Failed to load stats");
+      })
+      .finally(() => mounted && setLoading(false));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   return (
     <section className="flex items-center justify-center gap-6 flex-wrap">
       {/* left section */}
       <div className="">
         {/* upper 2 sections */}
         <div className="flex items-center justify-center gap-6 mb-6">
-          <div className="min-w-[300px] h-[180px] p-6 bg-white rounded-2xl shadow-md">
+          <div className="min-w-[300px] h-[180px] p-6 bg-white rounded-2xl shadow-sm">
             <div className="w-12 h-12 bg-gray-100 flex items-center justify-center rounded-lg mb-6 ">
               <svg
                 width="24"
@@ -65,7 +93,7 @@ const DashboardMain = () => {
               </div>
             </div>
           </div>
-          <div className="min-w-[300px] h-[180px] p-6 bg-white rounded-2xl shadow-md">
+          <div className="min-w-[300px] h-[180px] p-6 bg-white rounded-2xl shadow-sm">
             <div className="w-12 h-12 bg-gray-100 flex items-center justify-center rounded-lg mb-6 ">
               <svg
                 width="20"
@@ -119,18 +147,18 @@ const DashboardMain = () => {
         </div>
         {/* monthly sales */}
         <div className="">
-          <MonthlySalesChart />
+          <MonthlySalesChart data={stats?.monthlySales} loading={loading} />
         </div>
       </div>
 
       {/* Monthly target section */}
       <div className="">
-        <MonthlyTargetGauge />
+        <MonthlyTargetGauge summary={stats} loading={loading} error={error} />
       </div>
 
       {/* analytics section */}
       <div className="">
-        <StatisticsCard />
+        <StatisticsCard stats={stats} loading={loading} error={error} />
       </div>
       <div className="flex flex-col lg:flex-row gap-6">
         {/*customer demographic  */}
@@ -139,7 +167,7 @@ const DashboardMain = () => {
         </div>
         {/*  recent orders*/}
         <div className="">
-          <RecentOrdersCard />
+          <OrderTable />
         </div>
       </div>
     </section>

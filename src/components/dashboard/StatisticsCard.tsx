@@ -33,7 +33,15 @@ const data: Row[] = [
   { month: "Dec", TargetValue: 900, ActualValue: 650 },
 ];
 
-export default function StatisticsCard() {
+import type { StatsSummary } from "@/types";
+
+type Props = {
+  stats?: StatsSummary | null;
+  loading?: boolean;
+  error?: string | null;
+};
+
+export default function StatisticsCard({ stats, loading, error }: Props) {
   const [activeTab, setActiveTab] = useState<"Overview" | "Sales" | "Revenue">(
     "Overview"
   );
@@ -41,11 +49,35 @@ export default function StatisticsCard() {
   // control styles
   const tabBase =
     "px-3 py-1 rounded-lg h-11 text-sm transition-colors select-none cursor-pointer";
-  const activeTabCls = "bg-white text-gray-800 shadow-md font-medium"; // active button
+  const activeTabCls = "bg-white text-gray-800 shadow-sm font-medium"; // active button
   const inactiveTabCls = "text-gray-500";
 
+  if (loading) {
+    return (
+      <div className="w-full md:w-[1100px] h-[200px] bg-white rounded-2xl shadow-sm p-6 flex items-center justify-center">
+        <div className="text-sm text-gray-500">Loading statistics…</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="w-full md:w-[1100px] h-[200px] bg-white rounded-2xl shadow-sm p-6 flex items-center justify-center">
+        <div className="text-sm text-red-600">{error}</div>
+      </div>
+    );
+  }
+
+  const chartData = stats?.monthlySales
+    ? stats.monthlySales.map((m) => ({
+        month: m.month,
+        TargetValue: m.sales + 200,
+        ActualValue: m.sales,
+      }))
+    : data;
+
   return (
-    <div className="w-full md:w-[1100px] h-[400px] bg-white rounded-2xl shadow-md p-6">
+    <div className="w-full md:w-[1100px] h-[400px] bg-white rounded-2xl shadow-sm p-6">
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div>
@@ -116,7 +148,7 @@ export default function StatisticsCard() {
       <div className="w-full h-[300px]">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
-            data={data}
+            data={chartData}
             margin={{ top: 10, right: 32, left: 0, bottom: 0 }}
           >
             {/* Gradients for areas */}
