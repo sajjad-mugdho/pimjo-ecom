@@ -180,7 +180,7 @@ export default function Sidebar() {
         aria-label="Sidebar"
       >
         <div className="h-16 flex items-center justify-start px-4">
-          <Link href="/dashboard" className="flex items-start gap-2">
+          <Link href="/" className="flex items-start gap-2">
             <div className="">
               <svg
                 width="23"

@@ -220,7 +220,7 @@ const Productsection: React.FC = () => {
 
   if (loading) {
     return (
-      <section className="w-full bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm flex items-center justify-center">
+      <section className="w-[328px] md:w-full bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm flex items-center justify-center">
         <div className="text-sm text-gray-500">Loading products…</div>
       </section>
     );
@@ -228,7 +228,7 @@ const Productsection: React.FC = () => {
 
   if (error) {
     return (
-      <section className="w-full bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm flex items-center justify-center">
+      <section className="w-[328px] md:w-full bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm flex items-center justify-center">
         <div className="text-sm text-red-600">
           Error loading products: {error}
         </div>
@@ -241,22 +241,20 @@ const Productsection: React.FC = () => {
   const pageItems = filtered.slice(start, start + pageSize);
 
   return (
-    <section className="w-full bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm">
+    <section className="w-[328px] md:w-full bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm">
       <Toaster />
-      <div className="flex items-center justify-between gap-4 border-b border-gray-100 pb-4">
-        <h2 className="hidden sm:block text-lg font-semibold p-2">
-          All products
-        </h2>
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-gray-100 pb-4">
+        <h2 className=" text-lg font-semibold p-2">All products</h2>
 
-        <div className="flex items-center gap-3">
+        <div className="flex  items-center gap-3 w-full sm:w-auto">
           <button
             onClick={openCreate}
-            className="inline-flex items-center gap-2 h-11 px-4 rounded-lg border border-primary-400 bg-[#3758F9] text-white text-sm hover:brightness-95"
+            className="inline-flex items-center gap-2 h-11 md:min-w-[140px] px-4 rounded-lg border border-primary-400 bg-[#3758F9] text-white text-sm hover:brightness-95"
           >
-            <span className="hidden sm:block ">+ Add product</span>
+            <span className="hidden sm:block">+ Add product</span>
             <span className="sm:hidden">+</span>
           </button>
-          <div className="relative max-w-[216px] md:max-w-[420px] w-full ">
+          <div className="relative max-w-[216px] md:max-w-[420px] w-full">
             <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none">
               <svg
                 className="w-5 h-5 text-slate-400"
@@ -286,7 +284,7 @@ const Productsection: React.FC = () => {
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setFilterOpen((v) => !v)}
-              className="inline-flex items-center gap-2 h-11 px-4 rounded-lg border border-gray-200 bg-white text-sm text-slate-700 hover:bg-gray-50"
+              className="inline-flex md:min-w-[185px] items-center gap-2 h-11 px-4 rounded-[8px] border border-[#D0D5DD] bg-white text-sm text-slate-700 hover:bg-gray-50"
             >
               <svg
                 className="w-4 h-4 text-slate-600"
@@ -329,11 +327,11 @@ const Productsection: React.FC = () => {
         <table className="w-full min-w-[700px] table-auto">
           <thead className="text-left text-xs text-[#667085]">
             <tr>
-              <th className="min-w-[220px] px-3 py-3 font-medium">Products</th>
-              <th className="px-3 py-3 font-medium">Category</th>
-              <th className="px-3 py-3 font-medium text-right">Price</th>
-              <th className="px-3 py-3 font-medium text-right">Status</th>
-              <th className="px-3 py-3 font-medium text-right">Actions</th>
+              <th className="min-w-[220px] px-4 py-3 font-medium">Products</th>
+              <th className="px-4 py-3 font-medium">Category</th>
+              <th className="px-4 py-3 font-medium text-right">Price</th>
+              <th className="px-4 py-3 font-medium text-right">Status</th>
+              <th className="px-4 py-3 font-medium text-right">Actions</th>
             </tr>
           </thead>
 
@@ -342,7 +340,7 @@ const Productsection: React.FC = () => {
               <tr>
                 <td
                   colSpan={5}
-                  className="px-3 py-10 text-center text-sm text-slate-500"
+                  className="px-4 py-10 text-center text-sm text-slate-500"
                 >
                   No products found.
                 </td>
@@ -355,16 +353,16 @@ const Productsection: React.FC = () => {
                     key={p.id}
                     className="border-t border-gray-100 hover:bg-gray-50 transition"
                   >
-                    <td className="font-medium flex items-center gap-3 px-3 py-3">
+                    <td className="font-medium flex items-center gap-3 px-4 py-3">
                       <Image
                         src={p.image}
                         alt={p.name}
                         width={48}
                         height={48}
-                        className="rounded-md object-cover"
+                        className="rounded-md object-cover flex-shrink-0"
                       />
-                      <div>
-                        <div className="text-sm font-medium text-slate-900">
+                      <div className="min-w-0">
+                        <div className="text-sm font-medium text-slate-900 truncate">
                           {p.name}
                         </div>
                         <div className="text-xs text-slate-400">
@@ -372,13 +370,13 @@ const Productsection: React.FC = () => {
                         </div>
                       </div>
                     </td>
-                    <td className="text-sm text-[#667085] px-3 py-3">
+                    <td className="text-sm text-[#667085] px-4 py-3">
                       {p.category}
                     </td>
-                    <td className="text-sm text-[#667085] px-3 py-3 text-right">
+                    <td className="text-sm text-[#667085] px-4 py-3 text-right">
                       ${p.price.toLocaleString()}
                     </td>
-                    <td className="px-3 py-3 text-right">
+                    <td className="px-4 py-3 text-right">
                       {status === "Delivered" ? (
                         <span className="inline-flex items-center justify-center text-xs font-medium rounded-full px-2 py-0.5 bg-emerald-50 text-emerald-700">
                           Delivered
@@ -393,7 +391,7 @@ const Productsection: React.FC = () => {
                         </span>
                       )}
                     </td>
-                    <td className="px-3 py-3 text-right">
+                    <td className="px-4 py-3 text-right">
                       <div className="relative flex items-center justify-end">
                         <button
                           aria-haspopup="true"
@@ -401,7 +399,7 @@ const Productsection: React.FC = () => {
                           onClick={() =>
                             setMenuOpenId(menuOpenId === p.id ? null : p.id)
                           }
-                          className="w-8 h-8 inline-flex items-center justify-center rounded-md  bg-white text-slate-600 hover:bg-gray-50"
+                          className="w-8 h-8 inline-flex items-center justify-center rounded-md bg-white text-slate-600 hover:bg-gray-50"
                           title="Actions"
                         >
                           {/* three dots vertical */}
@@ -491,7 +489,7 @@ const Productsection: React.FC = () => {
       </div>
 
       {/* Pagination */}
-      <div className="mt-4 border-t border-gray-100 pt-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="mt-4 border-t border-gray-100 pt-4 flex  items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <button
             onClick={() => changePage(page - 1)}
@@ -515,11 +513,11 @@ const Productsection: React.FC = () => {
                 stroke-linejoin="round"
               />
             </svg>
-            Previous
+            <span className="hidden md:block">Previous</span>
           </button>
         </div>
 
-        <nav className="flex-1 flex items-center justify-center">
+        <nav className="flex-1 hidden md:flex items-center justify-center">
           <ul className="inline-flex items-center gap-2">
             {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => {
               const isActive = p === page;
@@ -550,7 +548,7 @@ const Productsection: React.FC = () => {
             }`}
             disabled={page >= totalPages}
           >
-            Next
+            <span className="hidden md:block">Next</span>
             <svg
               width="16"
               height="12"
@@ -571,46 +569,56 @@ const Productsection: React.FC = () => {
       </div>
       {/* Add / Edit modal (simple) */}
       {showForm && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-          <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-6">
+        <div className="fixed inset-0 z-50  flex items-center justify-center">
+          <div className="w-full max-w-[328px] bg-white rounded-xl shadow-lg p-6">
             <h3 className="text-lg font-semibold mb-4">
               {editing ? "Edit product" : "Add product"}
             </h3>
             <div className="grid grid-cols-1 gap-3">
-              <label className="text-sm font-medium">Product name</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Product name
+              </label>
               <input
                 value={formName}
                 onChange={(e) => setFormName(e.target.value)}
                 placeholder="Name"
-                className="w-full border rounded px-3 py-2"
+                className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#3758F9]"
               />
-              <label className="text-sm font-medium">Price</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Price
+              </label>
               <input
                 value={String(formPrice)}
                 onChange={(e) => setFormPrice(e.target.value)}
                 placeholder="Price"
-                className="w-full border rounded px-3 py-2"
+                className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#3758F9]"
               />
-              <label className="text-sm font-medium">Stock</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Stock
+              </label>
               <input
                 value={String(formStock)}
                 onChange={(e) => setFormStock(e.target.value)}
                 placeholder="Stock"
-                className="w-full border rounded px-3 py-2"
+                className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#3758F9]"
               />
-              <label className="text-sm font-medium">Category</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Category
+              </label>
               <input
                 value={formCategory}
                 onChange={(e) => setFormCategory(e.target.value)}
                 placeholder="Category"
-                className="w-full border rounded px-3 py-2"
+                className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#3758F9]"
               />
-              <label className="text-sm font-medium">Image local path</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Image local path
+              </label>
               <input
                 value={formImage}
                 onChange={(e) => setFormImage(e.target.value)}
                 placeholder="Image path"
-                className="w-full border rounded px-3 py-2"
+                className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#3758F9]"
               />
             </div>
 

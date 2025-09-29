@@ -1,4 +1,5 @@
 import React from "react";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import type { StatsSummary } from "@/types";
 
 type Props = {
@@ -11,7 +12,7 @@ const MonthlyTargetGauge = ({ summary, loading, error }: Props) => {
   if (loading) {
     return (
       <div className="w-[328px] md:w-[450px] h-[200px] bg-white rounded-3xl shadow-sm flex items-center justify-center">
-        <div className="text-sm text-gray-500">Loading target…</div>
+        <LoadingSpinner label="Loading target…" />
       </div>
     );
   }

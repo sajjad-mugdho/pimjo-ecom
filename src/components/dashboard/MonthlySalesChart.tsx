@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 type DataPoint = { month: string; sales: number };
 
@@ -31,8 +32,8 @@ export default function MonthlySalesChart({ data, loading }: Props) {
 
   if (loading) {
     return (
-      <div className="w-full md:w-[628px] md:h-[288px] bg-white rounded-xl p-6 shadow-sm">
-        <div className="text-sm text-gray-500">Loading chart…</div>
+      <div className="w-full md:w-[628px] md:h-[288px] bg-white rounded-xl p-6 shadow-sm flex items-center justify-center">
+        <LoadingSpinner label="Loading chart…" />
       </div>
     );
   }

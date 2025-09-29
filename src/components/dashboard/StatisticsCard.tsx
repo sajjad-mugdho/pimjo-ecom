@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import {
   ResponsiveContainer,
   AreaChart,
@@ -54,7 +55,7 @@ export default function StatisticsCard({ stats, loading, error }: Props) {
   if (loading) {
     return (
       <div className="w-[328px] md:w-[1100px] h-[200px] bg-white rounded-2xl shadow-sm p-6 flex items-center justify-center">
-        <div className="text-sm text-gray-500">Loading statistics…</div>
+        <LoadingSpinner label="Loading statistics…" />
       </div>
     );
   }

@@ -1,5 +1,10 @@
 import Image from "next/image";
 import React from "react";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
+
+type Props = {
+  loading?: boolean;
+};
 
 type CustomerItem = {
   country: string;
@@ -99,7 +104,14 @@ const customerData: CustomerItem[] = [
   },
 ];
 
-export default function DemographicCard() {
+export default function DemographicCard({ loading }: Props) {
+  if (loading) {
+    return (
+      <article className="bg-white rounded-2xl shadow-sm p-4 sm:p-6 w-[328px] sm:w-[413px] min-h-[420px] sm:h-[463px] flex items-center justify-center">
+        <LoadingSpinner label="Loading demographics…" />
+      </article>
+    );
+  }
   return (
     <article
       className="bg-white rounded-2xl shadow-sm p-4 sm:p-6 w-[328px] sm:w-[413px] min-h-[420px] sm:h-[463px] flex flex-col"

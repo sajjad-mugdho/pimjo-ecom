@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import Image from "next/image";
 import { apiGet } from "@/lib/api";
 import type { Order } from "@/types";
@@ -62,7 +63,7 @@ const OrderTable = () => {
   if (loading) {
     return (
       <section className="w-[328px] md:max-w-[665px] md:w-[665px] h-[200px] bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm flex items-center justify-center">
-        <div className="text-sm text-gray-500">Loading orders…</div>
+        <LoadingSpinner label="Loading orders…" />
       </section>
     );
   }
@@ -78,7 +79,7 @@ const OrderTable = () => {
   }
 
   return (
-    <section className="w-[328px] md:max-w-[665px] md:w-[665px] min-h-[463px] bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm">
+    <section className="w-[328px] md:max-w-[665px] md:w-[665px] min-h-[463px] bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm relative">
       <div className="flex flex-col md:flex-row md:items-center items-start min-h-[76px] justify-between border-b border-gray-200">
         <h2 className="text-lg font-semibold p-4 md:p-6">Recent Orders</h2>
         <div className="flex items-center gap-3 md:gap-5 justify-center md:justify-end overflow-x-auto pb-2 md:pb-0">
@@ -106,7 +107,7 @@ const OrderTable = () => {
             </button>
 
             {filterOpen && (
-              <div className="absolute right-0 mt-2 z-50 p-3 bg-white rounded-md shadow-sm border w-40">
+              <div className="absolute right-0 mt-2 z-[9999] p-3 bg-white rounded-md shadow-lg border w-40">
                 <div className="flex flex-col gap-2">
                   <label className="inline-flex items-center gap-2">
                     <input
