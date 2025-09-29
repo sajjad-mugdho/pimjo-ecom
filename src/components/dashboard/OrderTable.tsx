@@ -158,19 +158,19 @@ const OrderTable = () => {
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[500px] table-auto">
+        <table className="w-full min-w-[600px] md:min-w-[500px] table-auto">
           <thead className="my-2">
             <tr>
-              <th className="min-w-[150px] text-left text-xs text-[#667085] font-medium px-3 py-2">
+              <th className="min-w-[180px] md:min-w-[150px] text-left text-xs text-[#667085] font-medium px-4 py-3 md:px-3 md:py-2">
                 Product
               </th>
-              <th className="min-w-[100px] text-left text-xs text-[#667085] font-medium px-3 py-2">
+              <th className="min-w-[120px] md:min-w-[100px] text-left text-xs text-[#667085] font-medium px-4 py-3 md:px-3 md:py-2">
                 Category
               </th>
-              <th className="min-w-[80px] text-left text-xs text-[#667085] font-medium px-3 py-2">
+              <th className="min-w-[100px] md:min-w-[80px] text-left text-xs text-[#667085] font-medium px-4 py-3 md:px-3 md:py-2">
                 Price
               </th>
-              <th className="min-w-[100px] text-left text-xs text-[#667085] font-medium px-3 py-2">
+              <th className="min-w-[120px] md:min-w-[100px] text-left text-xs text-[#667085] font-medium px-4 py-3 md:px-3 md:py-2">
                 Status
               </th>
             </tr>
@@ -178,27 +178,28 @@ const OrderTable = () => {
           <tbody>
             {filtered.map((order) => (
               <tr key={order.id} className="border-t border-gray-100">
-                <td className="font-medium flex items-center gap-3 px-3 py-2 min-w-[150px]">
+                <td className="font-medium flex items-center gap-3 px-4 py-4 md:px-3 md:py-2 min-w-[180px] md:min-w-[150px]">
                   <Image
                     src={order.image}
                     alt={order.product}
                     width={50}
                     height={50}
+                    className="flex-shrink-0"
                   />
-                  <div>
-                    <div>{order.product}</div>
+                  <div className="min-w-0">
+                    <div className="truncate">{order.product}</div>
                     <p className="text-xs font-normal leading-6 text-gray-500">
                       2 Variants
                     </p>
                   </div>
                 </td>
-                <td className="text-sm text-[#667085] px-3 py-2 min-w-[100px]">
+                <td className="text-sm text-[#667085] px-4 py-4 md:px-3 md:py-2 min-w-[120px] md:min-w-[100px]">
                   {order.category}
                 </td>
-                <td className="text-sm text-[#667085] px-3 py-2 min-w-[80px]">
+                <td className="text-sm text-[#667085] px-4 py-4 md:px-3 md:py-2 min-w-[100px] md:min-w-[80px]">
                   {order.price}
                 </td>
-                <td className="px-3 py-2 min-w-[100px]">
+                <td className="px-4 py-4 md:px-3 md:py-2 min-w-[120px] md:min-w-[100px]">
                   {order.status === "Delivered" ? (
                     <div className="w-[70px] h-[22px] flex items-center justify-center">
                       <svg
