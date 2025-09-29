@@ -3,11 +3,7 @@
 import React, { useState } from "react";
 import { useDashboardStore } from "@/store/useDashboardStore";
 import Image from "next/image";
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-} from "@/components/ui/popover";
+
 import NotificationsPanel from "@/components/dashboard/NotificationsPanel";
 import ProfileDropdown from "@/components/dashboard/ProfileDropdown";
 
@@ -184,12 +180,13 @@ export default function DashboardHeader() {
           )}
         </button>
 
-        {/* Notifications (popover) */}
-        <Popover open={notifOpen} onOpenChange={setNotifOpen}>
-          <PopoverTrigger asChild>
+        {/* Notifications dropdown (no UI library) */}
+        <div className="relative">
+          <div className="relative">
             <button
               type="button"
               aria-label="Notifications"
+              onClick={() => setNotifOpen((v) => !v)}
               className="inline-flex items-center justify-center h-10 w-10 rounded-full border border-gray-200 bg-white hover:bg-gray-50 relative"
               style={{ color: "#667085" }}
             >
@@ -208,25 +205,29 @@ export default function DashboardHeader() {
                   strokeLinejoin="round"
                 />
               </svg>
-              {/* small badge */}
               <span className="absolute top-0 right-0 inline-flex items-center justify-center h-2 w-2 rounded-full bg-red-400 text-white text-[10px]"></span>
             </button>
-          </PopoverTrigger>
 
-          <PopoverContent
-            side="bottom"
-            align="end"
-            sideOffset={8}
-            className="p-0 bg-transparent shadow-none"
-          >
-            <NotificationsPanel onClose={() => setNotifOpen(false)} />
-          </PopoverContent>
-        </Popover>
+            {notifOpen && (
+              <div
+                className="absolute right-0 mt-2 z-50"
+                style={{ minWidth: 0 }}
+              >
+                <NotificationsPanel onClose={() => setNotifOpen(false)} />
+              </div>
+            )}
+          </div>
+        </div>
 
-        {/* User avatar + name + dropdown (popover) */}
-        <Popover open={profileOpen} onOpenChange={setProfileOpen}>
-          <PopoverTrigger asChild>
-            <button className="flex items-center gap-2 px-2 py-1 rounded-md hover:bg-gray-50 cursor-pointer">
+        {/* User avatar + name + dropdown (no UI library) */}
+        <div className="relative">
+          <div className="relative inline-block">
+            <button
+              onClick={() => setProfileOpen((v) => !v)}
+              className="flex items-center gap-2 px-2 py-1 rounded-md hover:bg-gray-50 cursor-pointer"
+              aria-haspopup="true"
+              aria-expanded={profileOpen}
+            >
               <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-sm font-medium text-[#667085]">
                 <Image
                   src="/avatar-1.png"
@@ -259,22 +260,19 @@ export default function DashboardHeader() {
                 </svg>
               </div>
             </button>
-          </PopoverTrigger>
 
-          <PopoverContent
-            side="bottom"
-            align="end"
-            sideOffset={8}
-            className="p-0 bg-transparent shadow-none"
-          >
-            <ProfileDropdown
-              onClose={() => setProfileOpen(false)}
-              onSignOut={() => {
-                /* placeholder */
-              }}
-            />
-          </PopoverContent>
-        </Popover>
+            {profileOpen && (
+              <div className="absolute right-0 mt-2 z-50">
+                <ProfileDropdown
+                  onClose={() => setProfileOpen(false)}
+                  onSignOut={() => {
+                    /* placeholder */
+                  }}
+                />
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </header>
   );

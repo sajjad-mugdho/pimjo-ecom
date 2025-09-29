@@ -1,21 +1,7 @@
 "use client";
 
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-} from "@/components/ui/popover";
 
 const OrderTable = () => {
   interface Order {
@@ -76,6 +62,8 @@ const OrderTable = () => {
     },
   ];
   const [selectedStatuses, setSelectedStatuses] = useState<string[]>([]);
+  const [filterOpen, setFilterOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const toggleStatus = (s: string) => {
     setSelectedStatuses((prev) =>
@@ -88,127 +76,143 @@ const OrderTable = () => {
       ? Orderdata.filter((o) => selectedStatuses.includes(o.status))
       : Orderdata;
 
+  useEffect(() => {
+    function onDoc(e: MouseEvent) {
+      if (!dropdownRef.current) return;
+      if (e.target instanceof Node && dropdownRef.current.contains(e.target)) {
+        return;
+      }
+      setFilterOpen(false);
+    }
+
+    if (filterOpen) {
+      document.addEventListener("mousedown", onDoc);
+    }
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, [filterOpen]);
+
   return (
     <section className="max-w-[665px] md:w-[665px] w-full h-[463px] bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-md">
       <div className="flex items-center h-[76px] justify-between border-b border-gray-200">
         <h2 className="text-lg font-semibold p-6">Recent Orders</h2>
         <div className="flex items-center gap-5 justify-center">
-          <Popover>
-            <PopoverTrigger asChild>
-              <button className="inline-flex items-center h-11 gap-2 px-3 py-1 rounded-[8px] border border-[#D0D5DD] text-sm text-gray-700 hover:bg-gray-50 ml-6 mb-4">
-                {/* calendar icon (inline SVG) */}
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M14.6533 5.90421C14.6533 4.48439 13.5023 3.33337 12.0825 3.33337C10.6627 3.33337 9.5117 4.48439 9.51168 5.90421M14.6533 5.90421C14.6533 7.32404 13.5023 8.47504 12.0825 8.47504C10.6627 8.47504 9.51168 7.32404 9.51168 5.90421M14.6533 5.90421L17.7083 5.90417M9.51168 5.90421L2.29163 5.90417M5.34658 14.0959C5.34658 12.676 6.49758 11.525 7.91741 11.525C9.33724 11.525 10.4882 12.676 10.4882 14.0959M5.34658 14.0959C5.34658 15.5157 6.49758 16.6667 7.91741 16.6667C9.33724 16.6667 10.4882 15.5157 10.4882 14.0959M5.34658 14.0959L2.29163 14.0958M10.4882 14.0959L17.7083 14.0958"
-                    stroke="#344054"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                Filter
-              </button>
-            </PopoverTrigger>
-
-            <PopoverContent
-              side="bottom"
-              align="start"
-              sideOffset={8}
-              className="p-3 bg-white rounded-md shadow-lg border"
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setFilterOpen((v) => !v)}
+              className="inline-flex items-center h-11 gap-2 px-3 py-1 rounded-[8px] border border-[#D0D5DD] text-sm text-gray-700 hover:bg-gray-50 ml-6 mb-4"
             >
-              <div className="flex flex-col gap-2">
-                <label className="inline-flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={selectedStatuses.includes("Delivered")}
-                    onChange={() => toggleStatus("Delivered")}
-                    className="w-4 h-4"
-                  />
-                  <span className="text-sm">Delivered</span>
-                </label>
-                <label className="inline-flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={selectedStatuses.includes("Pending")}
-                    onChange={() => toggleStatus("Pending")}
-                    className="w-4 h-4"
-                  />
-                  <span className="text-sm">Pending</span>
-                </label>
-                <label className="inline-flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={selectedStatuses.includes("Cancelled")}
-                    onChange={() => toggleStatus("Cancelled")}
-                    className="w-4 h-4"
-                  />
-                  <span className="text-sm">Cancelled</span>
-                </label>
-                <div className="pt-2 flex justify-end">
-                  <button
-                    onClick={() => setSelectedStatuses([])}
-                    className="text-sm text-[#667085] px-2 py-1 rounded hover:bg-gray-50"
-                  >
-                    Clear
-                  </button>
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M14.6533 5.90421C14.6533 4.48439 13.5023 3.33337 12.0825 3.33337C10.6627 3.33337 9.5117 4.48439 9.51168 5.90421M14.6533 5.90421C14.6533 7.32404 13.5023 8.47504 12.0825 8.47504C10.6627 8.47504 9.51168 7.32404 9.51168 5.90421M14.6533 5.90421L17.7083 5.90417M9.51168 5.90421L2.29163 5.90417M5.34658 14.0959C5.34658 12.676 6.49758 11.525 7.91741 11.525C9.33724 11.525 10.4882 12.676 10.4882 14.0959M5.34658 14.0959C5.34658 15.5157 6.49758 16.6667 7.91741 16.6667C9.33724 16.6667 10.4882 15.5157 10.4882 14.0959M5.34658 14.0959L2.29163 14.0958M10.4882 14.0959L17.7083 14.0958"
+                  stroke="#344054"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              Filter
+            </button>
+
+            {filterOpen && (
+              <div className="absolute right-0 mt-2 z-50 p-3 bg-white rounded-md shadow-lg border w-40">
+                <div className="flex flex-col gap-2">
+                  <label className="inline-flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={selectedStatuses.includes("Delivered")}
+                      onChange={() => toggleStatus("Delivered")}
+                      className="w-4 h-4"
+                    />
+                    <span className="text-sm">Delivered</span>
+                  </label>
+                  <label className="inline-flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={selectedStatuses.includes("Pending")}
+                      onChange={() => toggleStatus("Pending")}
+                      className="w-4 h-4"
+                    />
+                    <span className="text-sm">Pending</span>
+                  </label>
+                  <label className="inline-flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={selectedStatuses.includes("Cancelled")}
+                      onChange={() => toggleStatus("Cancelled")}
+                      className="w-4 h-4"
+                    />
+                    <span className="text-sm">Cancelled</span>
+                  </label>
+                  <div className="pt-2 flex justify-end">
+                    <button
+                      onClick={() => {
+                        setSelectedStatuses([]);
+                        setFilterOpen(false);
+                      }}
+                      className="text-sm text-[#667085] px-2 py-1 rounded hover:bg-gray-50"
+                    >
+                      Clear
+                    </button>
+                  </div>
                 </div>
               </div>
-            </PopoverContent>
-          </Popover>
+            )}
+          </div>
+
           <button className="inline-flex items-center h-11 gap-2 px-3 py-1 rounded-[8px] border border-[#D0D5DD] text-sm text-gray-700 hover:bg-gray-50 ml-2 mb-4">
             See all
           </button>
         </div>
       </div>
 
-      <div className="">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="min-w-[100px] text-xs text-[#667085] font-medium ">
+      <div className="mt-4 overflow-x-auto">
+        <table className="w-full table-auto">
+          <thead>
+            <tr>
+              <th className="min-w-[100px] text-left text-xs text-[#667085] font-medium px-3 py-2">
                 Product
-              </TableHead>
-              <TableHead className="text-xs text-[#667085] font-medium ">
+              </th>
+              <th className="text-left text-xs text-[#667085] font-medium px-3 py-2">
                 Category
-              </TableHead>
-              <TableHead className="text-xs text-[#667085] font-medium ">
+              </th>
+              <th className="text-left text-xs text-[#667085] font-medium px-3 py-2">
                 Price
-              </TableHead>
-              <TableHead className="text-xs  text-[#667085] font-medium ">
+              </th>
+              <th className="text-left text-xs text-[#667085] font-medium px-3 py-2">
                 Status
-              </TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
             {filtered.map((order) => (
-              <TableRow key={order.id}>
-                <TableCell className="font-medium flex items-center gap-3">
+              <tr key={order.id} className="border-t border-gray-100">
+                <td className="font-medium flex items-center gap-3 px-3 py-3">
                   <Image
                     src={order.image}
                     alt={order.product}
                     width={50}
                     height={50}
-                  />{" "}
-                  <div className="">
-                    {order.product}
+                  />
+                  <div>
+                    <div>{order.product}</div>
                     <p className="text-xs font-normal leading-6 text-gray-500">
                       2 Variants
                     </p>
                   </div>
-                </TableCell>
-                <TableCell className=" text-sm text-[#667085]">
+                </td>
+                <td className="text-sm text-[#667085] px-3 py-3">
                   {order.category}
-                </TableCell>
-                <TableCell className=" text-sm text-[#667085]">
+                </td>
+                <td className="text-sm text-[#667085] px-3 py-3">
                   {order.price}
-                </TableCell>
-                <TableCell className="">
+                </td>
+                <td className="px-3 py-3">
                   {order.status === "Delivered" ? (
                     <div className="w-[70px] h-[22px] flex items-center justify-center">
                       <svg
@@ -239,11 +243,11 @@ const OrderTable = () => {
                       Cancelled
                     </div>
                   )}
-                </TableCell>
-              </TableRow>
+                </td>
+              </tr>
             ))}
-          </TableBody>
-        </Table>
+          </tbody>
+        </table>
       </div>
     </section>
   );

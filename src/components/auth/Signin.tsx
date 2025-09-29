@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+
 import Link from "next/link";
 
 const Signin = () => {
@@ -124,7 +123,7 @@ const Signin = () => {
               Email <span className="text-red-500">*</span>
             </label>
             <div className="mt-1">
-              <Input
+              <input
                 id="email"
                 name="email"
                 type="email"
@@ -134,6 +133,7 @@ const Signin = () => {
                 placeholder="you@example.com"
                 aria-required="true"
                 required
+                className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#3758F9]"
               />
             </div>
           </div>
@@ -146,7 +146,7 @@ const Signin = () => {
               Password <span className="text-red-500">*</span>
             </label>
             <div className="mt-1">
-              <Input
+              <input
                 id="password"
                 name="password"
                 type="password"
@@ -156,6 +156,7 @@ const Signin = () => {
                 placeholder="Enter your password"
                 aria-required="true"
                 required
+                className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#3758F9]"
               />
             </div>
           </div>
@@ -186,13 +187,13 @@ const Signin = () => {
           </div>
 
           <div>
-            <Button
+            <button
               type="submit"
-              className="w-full h-12 bg-[#3758F9] hover:bg-[#254eda] text-white"
+              className="w-full h-12 bg-[#3758F9] hover:bg-[#254eda] text-white rounded-md"
               disabled={loading}
             >
               {loading ? "Signing in..." : "Sign in"}
-            </Button>
+            </button>
           </div>
           {error && (
             <p className="text-sm text-red-600 mt-2" role="alert">

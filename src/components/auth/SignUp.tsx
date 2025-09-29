@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
+
 import Link from "next/link";
 
 const SignUp = () => {
@@ -132,7 +131,7 @@ const SignUp = () => {
               Email <span className="text-red-500">*</span>
             </label>
             <div className="mt-1">
-              <Input
+              <input
                 id="email"
                 name="email"
                 type="email"
@@ -142,6 +141,7 @@ const SignUp = () => {
                 placeholder="you@example.com"
                 aria-required="true"
                 required
+                className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#3758F9]"
               />
             </div>
           </div>
@@ -154,7 +154,7 @@ const SignUp = () => {
               Password <span className="text-red-500">*</span>
             </label>
             <div className="mt-1">
-              <Input
+              <input
                 id="password"
                 name="password"
                 type="password"
@@ -164,6 +164,7 @@ const SignUp = () => {
                 placeholder="Create a password"
                 aria-required="true"
                 required
+                className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#3758F9]"
               />
             </div>
           </div>
@@ -176,7 +177,7 @@ const SignUp = () => {
               Retype password <span className="text-red-500">*</span>
             </label>
             <div className="mt-1">
-              <Input
+              <input
                 id="confirmPassword"
                 name="confirmPassword"
                 type="password"
@@ -186,6 +187,7 @@ const SignUp = () => {
                 placeholder="Retype your password"
                 aria-required="true"
                 required
+                className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#3758F9]"
               />
             </div>
           </div>
@@ -219,13 +221,13 @@ const SignUp = () => {
           {error && <p className="text-sm text-red-600">{error}</p>}
 
           <div className="w-full">
-            <Button
+            <button
               type="submit"
-              className="w-full h-12 bg-[#3758F9] hover:bg-[#254eda] text-white"
+              className="w-full h-12 bg-[#3758F9] hover:bg-[#254eda] text-white rounded-md"
               disabled={loading}
             >
               {loading ? "Creating..." : "Create account"}
-            </Button>
+            </button>
           </div>
 
           <span className="text-[16px] text-left text-[#6B7280] leading-6">
