@@ -107,23 +107,23 @@ const customerData: CustomerItem[] = [
 export default function DemographicCard({ loading }: Props) {
   if (loading) {
     return (
-      <article className="bg-white dark:bg-[#FFFFFF08] rounded-2xl shadow-sm p-4 sm:p-6 w-[328px] sm:w-[413px] min-h-[420px] sm:h-[463px] flex items-center justify-center">
+      <article className="bg-white dark:bg-[#FFFFFF08] dark:border dark:border-[#1D2939] rounded-2xl shadow-sm p-4 sm:p-6 w-[328px] sm:w-[413px] min-h-[420px] sm:h-[463px] flex items-center justify-center">
         <LoadingSpinner label="Loading demographics…" />
       </article>
     );
   }
   return (
     <article
-      className="bg-white dark:bg-[#FFFFFF08] rounded-2xl shadow-sm p-4 sm:p-6 w-[328px] sm:w-[413px] min-h-[420px] sm:h-[463px] flex flex-col"
+      className="bg-white dark:bg-[#FFFFFF08] dark:border dark:border-[#1D2939] rounded-2xl shadow-sm p-4 sm:p-6 w-[328px] sm:w-[413px] min-h-[420px] sm:h-[463px] flex flex-col"
       aria-labelledby="demographic-title"
     >
       {/* Header */}
       <header className="flex items-start justify-between">
         <div>
-          <h3 className="text-lg font-semibold leading-7 text-[#1D2939]">
+          <h3 className="text-lg font-semibold leading-7 text-[#1D2939] dark:text-[#FFFFFFE5]">
             Customer Demographics
           </h3>
-          <p className="text-sm leading-5 text-[#667085] mt-1">
+          <p className="text-sm leading-5 text-[#667085] dark:text-[#98A2B3] mt-1">
             Number of customers based on country
           </p>
         </div>
@@ -148,7 +148,7 @@ export default function DemographicCard({ loading }: Props) {
       </header>
 
       {/* Map */}
-      <div className="mt-5 bg-[#F9FAFB] dark:bg-[#101828] rounded-xl border border-[#E4E7EC] p-3 sm:p-4 flex-shrink-0">
+      <div className="mt-5 bg-[#F9FAFB] dark:bg-[#1D2939] rounded-xl border border-[#E4E7EC] dark:border-[#1D2939] p-3 sm:p-4 flex-shrink-0">
         <div className="relative w-full h-[140px] sm:h-[170px] rounded-lg overflow-hidden">
           <Image
             src="/map.svg"
@@ -166,10 +166,10 @@ export default function DemographicCard({ loading }: Props) {
             <div className="flex items-center justify-center gap-2 sm:gap-3">
               <div className="w-6 h-6 mx-2 sm:w-8 sm:h-8">{item.flagEmoji}</div>
               <div className="min-w-0">
-                <div className="text-sm font-semibold text-gray-900 truncate">
+                <div className="text-sm font-semibold text-gray-900 dark:text-[#FFFFFFE5] truncate">
                   {item.country}
                 </div>
-                <div className="text-xs text-gray-500 truncate">
+                <div className="text-xs text-gray-500 dark:text-[#98A2B3] truncate">
                   {item.customers.toLocaleString()} Customers
                 </div>
               </div>
@@ -177,7 +177,7 @@ export default function DemographicCard({ loading }: Props) {
 
             <div className="flex items-center gap-2">
               <div className="w-20 sm:w-[98px]">
-                <div className="bg-gray-200 rounded-full h-2 overflow-hidden">
+                <div className="bg-gray-200 dark:bg-[#1D2939] rounded-full h-2 overflow-hidden">
                   <div
                     className="h-2 rounded-full bg-[#3758F9]"
                     style={{
@@ -188,7 +188,7 @@ export default function DemographicCard({ loading }: Props) {
               </div>
 
               <div className="w-10 sm:w-12 text-right">
-                <span className="text-sm font-normal text-gray-800">
+                <span className="text-sm font-normal text-gray-800 dark:text-[#FFFFFFE5]">
                   {item.percentage}%
                 </span>
               </div>

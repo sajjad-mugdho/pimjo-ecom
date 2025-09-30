@@ -86,7 +86,7 @@ export default function StatisticsCard({ stats, loading, error }: Props) {
   const tooltipText = dark ? "#FFFFFFE5" : "#111827";
 
   return (
-    <div className="w-[328px] md:w-[1100px] min-h-[400px] bg-white dark:bg-[#101828] rounded-2xl shadow-sm p-6 overflow-hidden">
+    <div className="w-[328px] md:w-[1100px] min-h-[400px] bg-white dark:bg-[#FFFFFF08] dark:border dark:border-[#1D2939] rounded-2xl shadow-sm p-6 overflow-hidden">
       {/* Header */}
       <div className="flex flex-col md:flex-row items-start gap-y-4 md:gap-y-0 justify-between mb-4">
         <div>
