@@ -8,11 +8,13 @@ import MonthlySalesChart from "./MonthlySalesChart";
 import MonthlyTargetGauge from "./MonthlyTargetGauge";
 import DemographicCard from "./DemographicCard";
 import OrderTable from "./OrderTable";
+import { useDashboardStore } from "@/store/useDashboardStore";
 
 const DashboardMain = () => {
   const [stats, setStats] = React.useState<StatsSummary | null>(null);
   const [loading, setLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
+  const dark = useDashboardStore((s) => s.dark);
 
   React.useEffect(() => {
     let mounted = true;
@@ -40,8 +42,8 @@ const DashboardMain = () => {
       <div className="">
         {/* upper 2 sections */}
         <div className="flex  flex-col md:flex-row items-center justify-center gap-6 mb-6">
-          <div className="min-w-[300px] w-[328px] md:w-[302px] h-[180px] p-6 bg-white rounded-2xl shadow-sm">
-            <div className="w-12 h-12 bg-gray-100 flex items-center justify-center rounded-lg mb-6 ">
+          <div className="min-w-[300px] w-[328px] md:w-[302px] h-[180px] p-6 bg-white dark:bg-[#FFFFFF08] dark:border dark:border-[#1D2939]  rounded-2xl shadow-sm">
+            <div className="w-12 h-12 bg-gray-100 dark:bg-[#1D2939] flex items-center justify-center rounded-lg mb-6 ">
               <svg
                 width="24"
                 height="24"
@@ -51,7 +53,7 @@ const DashboardMain = () => {
               >
                 <path
                   d="M14.109 5.10414C14.4743 4.94178 14.8789 4.85156 15.3045 4.85156C16.932 4.85156 18.2514 6.17095 18.2514 7.79851C18.2514 9.42606 16.932 10.7455 15.3045 10.7455C14.8794 10.7455 14.4753 10.6555 14.1103 10.4935M15.797 13.2207C19.5989 13.4453 20.821 16.009 21.2134 17.6906C21.3993 18.4875 20.7424 19.1487 19.9241 19.1487H17.59M11.7512 7.79855C11.7512 9.4261 10.4318 10.7455 8.80427 10.7455C7.17671 10.7455 5.85732 9.4261 5.85732 7.79855C5.85732 6.171 7.17671 4.8516 8.80427 4.8516C10.4318 4.8516 11.7512 6.171 11.7512 7.79855ZM8.74941 13.205C12.9833 13.205 14.3026 15.9309 14.7132 17.6906C14.8991 18.4875 14.2422 19.1487 13.4239 19.1487H4.07489C3.25661 19.1487 2.59973 18.4875 2.78565 17.6906C3.19623 15.9309 4.51554 13.205 8.74941 13.205Z"
-                  stroke="#1D2939"
+                  stroke={dark ? "#FFFFFFE5" : "#1D2939"}
                   stroke-width="1.5"
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -60,10 +62,12 @@ const DashboardMain = () => {
             </div>
             <div className="flex items-center justify-between">
               <div className="">
-                <p className="text-sm leading-5 text-[#667085] mb-4">
+                <p className="text-sm leading-5 text-[#667085]  mb-4">
                   Customer
                 </p>
-                <h3 className="text-3xl leading-8 font-bold mt-2">3,782</h3>
+                <h3 className="text-3xl leading-8 dark:text-[#FFFFFFE5] font-bold mt-2">
+                  3,782
+                </h3>
               </div>
               {/* badge */}
               <div className="mt-4">
@@ -76,7 +80,7 @@ const DashboardMain = () => {
                 >
                   <path
                     d="M0 12C0 5.37258 5.37258 0 12 0H60C66.6274 0 72 5.37258 72 12C72 18.6274 66.6274 24 60 24H12C5.37258 24 0 18.6274 0 12Z"
-                    fill="#ECFDF3"
+                    fill={dark ? "#12B76A1A" : "#ECFDF3"}
                   />
                   <path
                     d="M13.998 7.99951L13.998 16.0002M11 10.9975L13.9999 7.99951L17 10.9975"
@@ -93,8 +97,8 @@ const DashboardMain = () => {
               </div>
             </div>
           </div>
-          <div className="min-w-[300px] w-[328px] md:w-[302px] h-[180px] p-6 bg-white rounded-2xl shadow-sm">
-            <div className="w-12 h-12 bg-gray-100 flex items-center justify-center rounded-lg mb-6 ">
+          <div className="min-w-[300px] w-[328px] md:w-[302px] h-[180px] p-6 bg-white dark:bg-[#FFFFFF08] dark:border dark:border-[#1D2939] rounded-2xl shadow-sm">
+            <div className="w-12 h-12 bg-gray-100 dark:bg-[#1D2939] flex items-center justify-center rounded-lg mb-6 ">
               <svg
                 width="20"
                 height="20"
@@ -104,7 +108,7 @@ const DashboardMain = () => {
               >
                 <path
                   d="M10 19.072V9.02882M10 9.02882C9.77031 9.02876 9.54064 8.97598 9.32963 8.87047M10 9.02882C10.23 9.02889 10.46 8.97611 10.6712 8.87047M10.6712 8.87047C10.249 9.08161 9.75191 9.08161 9.32963 8.87047M10.6712 8.87047L18.2212 5.09562M9.32963 8.87047L1.7797 5.09562M18.2212 5.09562C18.078 4.87199 17.8754 4.68611 17.6287 4.56277L10.6712 1.08413C10.249 0.872998 9.75191 0.872997 9.32963 1.08413L2.37216 4.56277C2.12546 4.68611 1.92287 4.87199 1.7797 5.09562M18.2212 5.09562C18.3729 5.33264 18.4579 5.61207 18.4579 5.90441V14.0934C18.4579 14.6615 18.1369 15.1809 17.6287 15.435L10.6712 18.9137C10.249 19.1248 9.75191 19.1248 9.32963 18.9137L2.37216 15.435C1.86398 15.1809 1.54297 14.6615 1.54297 14.0934V5.90441C1.54297 5.61207 1.62796 5.33264 1.7797 5.09562"
-                  stroke="#1D2939"
+                  stroke={dark ? "#FFFFFFE5" : "#1D2939"}
                   stroke-width="1.5"
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -114,7 +118,9 @@ const DashboardMain = () => {
             <div className="flex items-center justify-between">
               <div className="">
                 <p className="text-sm leading-5 text-[#667085] mb-4">Orders</p>
-                <h3 className="text-3xl leading-8 font-bold mt-2">5,359</h3>
+                <h3 className="text-3xl leading-8 dark:text-[#FFFFFFE5] font-bold mt-2">
+                  5,359
+                </h3>
               </div>
               {/* badge */}
               <div className="mt-4">
@@ -127,7 +133,7 @@ const DashboardMain = () => {
                 >
                   <path
                     d="M0 12C0 5.37258 5.37258 0 12 0H63C69.6274 0 75 5.37258 75 12C75 18.6274 69.6274 24 63 24H12C5.37259 24 0 18.6274 0 12Z"
-                    fill="#FEF3F2"
+                    fill={dark ? "#F0443826" : "#FEF3F2"}
                   />
                   <path
                     d="M13.998 16.0004L13.998 7.99976M11 13.0024L13.9999 16.0004L17 13.0024"

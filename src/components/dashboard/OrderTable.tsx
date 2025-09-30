@@ -79,7 +79,7 @@ const OrderTable = () => {
   }
 
   return (
-    <section className="w-[328px] md:max-w-[665px] md:w-[665px] min-h-[463px] bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm relative">
+    <section className="w-[328px] md:max-w-[665px] md:w-[665px] min-h-[463px] bg-white dark:bg-[#FFFFFF08] px-4 sm:px-6 py-4 rounded-2xl shadow-sm relative">
       <div className="flex flex-col md:flex-row md:items-center items-start min-h-[76px] justify-between border-b border-gray-200">
         <h2 className="text-lg font-semibold p-4 md:p-6">Recent Orders</h2>
         <div className="flex items-center gap-3 md:gap-5 justify-center md:justify-end overflow-x-auto pb-2 md:pb-0">

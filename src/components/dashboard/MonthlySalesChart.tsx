@@ -32,14 +32,14 @@ export default function MonthlySalesChart({ data, loading }: Props) {
 
   if (loading) {
     return (
-      <div className="w-full md:w-[628px] md:h-[288px] bg-white rounded-xl p-6 shadow-sm flex items-center justify-center">
+      <div className="w-full md:w-[628px] md:h-[288px] bg-white dark:bg-[#FFFFFF08] rounded-xl p-6 shadow-sm flex items-center justify-center">
         <LoadingSpinner label="Loading chart…" />
       </div>
     );
   }
 
   return (
-    <div className="w-[328px] md:w-[628px] md:min-h-[288px] bg-white rounded-xl p-6 shadow-sm overflow-hidden">
+    <div className="w-[328px] md:w-[628px] md:min-h-[288px] bg-white dark:bg-[#FFFFFF08] rounded-xl p-6 shadow-sm overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-semibold leading-7 text-[#1D2939]">

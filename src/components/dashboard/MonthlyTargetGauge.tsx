@@ -11,7 +11,7 @@ type Props = {
 const MonthlyTargetGauge = ({ summary, loading, error }: Props) => {
   if (loading) {
     return (
-      <div className="w-[328px] md:w-[450px] h-[200px] bg-white rounded-3xl shadow-sm flex items-center justify-center">
+      <div className="w-[328px] md:w-[450px] h-[200px] bg-white dark:bg-[#FFFFFF08] rounded-3xl shadow-sm flex items-center justify-center">
         <LoadingSpinner label="Loading target…" />
       </div>
     );
@@ -19,7 +19,7 @@ const MonthlyTargetGauge = ({ summary, loading, error }: Props) => {
 
   if (error) {
     return (
-      <div className="w-[328px] md:w-[450px] h-[200px] bg-white rounded-3xl shadow-sm flex items-center justify-center">
+      <div className="w-[328px] md:w-[450px] h-[200px] bg-white dark:bg-[#FFFFFF08] rounded-3xl shadow-sm flex items-center justify-center">
         <div className="text-sm text-red-600">{error}</div>
       </div>
     );
@@ -31,16 +31,16 @@ const MonthlyTargetGauge = ({ summary, loading, error }: Props) => {
   const stroke = 14;
 
   return (
-    <div className="w-[328px] md:w-[450px] h-[494px] bg-gray-100 rounded-3xl shadow-sm overflow-hidden">
+    <div className="w-[328px] md:w-[450px] h-[494px] bg-gray-100 dark:bg-[#FFFFFF08] dark:border dark:border-[#1D2939] rounded-3xl shadow-sm overflow-hidden">
       {/* Top main body ~80% */}
       <div
-        className="bg-white p-4 md:p-6 min-h-[402px] rounded-2xl"
+        className="bg-white dark:bg-[#101828] p-4 md:p-6 min-h-[402px] rounded-2xl"
         style={{ height: "80%" }}
       >
         {/* Header */}
         <div className="flex items-start justify-between mb-4">
           <div>
-            <h3 className="text-lg md:text-lg font-semibold leading-7 text-[#1D2939]">
+            <h3 className="text-lg md:text-lg font-semibold leading-7 text-[#1D2939] dark:text-[#FFFFFFE5]">
               Monthly Target
             </h3>
             <p className="text-sm leading-5 text-[#667085] mt-1">
@@ -122,10 +122,10 @@ const MonthlyTargetGauge = ({ summary, loading, error }: Props) => {
                   </g>
                 </svg>
               </div>
-              <div className="text-3xl md:text-4xl font-bold leading-11 text-[#1D2939] relative z-10">
+              <div className="text-3xl md:text-4xl font-bold leading-11 text-[#1D2939] dark:text-[#FFFFFFE5] relative z-10">
                 75.00%
               </div>
-              <div className="mt-2 inline-flex items-center px-3 py-1 rounded-full bg-green-100/70 text-green-600 text-sm">
+              <div className="mt-2 inline-flex items-center px-3 py-1 rounded-full bg-green-100/70 text-green-600 dark:bg-[#12B76A26] text-sm">
                 +10.7%
               </div>
               <p className="text-center w-full md:min-w-[400px] mt-6 md:mt-8 text-[14px] md:text-[16px] text-[#667085] leading-6">
@@ -143,7 +143,7 @@ const MonthlyTargetGauge = ({ summary, loading, error }: Props) => {
           <div className="flex flex-col items-center justify-center">
             <div className="text-xs md:text-sm text-[#667085]">Target</div>
             <div className="mt-1 inline-flex items-center gap-2">
-              <span className="text-base md:text-lg font-bold text-[#1D2939] leading-7">
+              <span className="text-base md:text-lg font-bold text-[#1D2939] dark:text-[#FFFFFFE5] leading-7">
                 $20K
               </span>
               <svg
@@ -170,7 +170,7 @@ const MonthlyTargetGauge = ({ summary, loading, error }: Props) => {
               Revenue
             </div>
             <div className="mt-1 inline-flex items-center gap-2">
-              <span className="text-base md:text-lg font-bold text-[#1D2939] leading-7">
+              <span className="text-base md:text-lg font-bold text-[#1D2939] dark:text-[#FFFFFFE5] leading-7">
                 $16K
               </span>
               <svg
@@ -197,7 +197,7 @@ const MonthlyTargetGauge = ({ summary, loading, error }: Props) => {
               Today
             </div>
             <div className="mt-1 inline-flex items-center gap-2">
-              <span className="text-base md:text-lg font-bold text-[#1D2939] leading-7">
+              <span className="text-base md:text-lg font-bold text-[#1D2939] dark:text-[#FFFFFFE5] leading-7">
                 $1.5K
               </span>
               <svg

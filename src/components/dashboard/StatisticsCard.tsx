@@ -34,6 +34,7 @@ const data: Row[] = [
 ];
 
 import type { StatsSummary } from "@/types";
+import { useDashboardStore } from "@/store/useDashboardStore";
 
 type Props = {
   stats?: StatsSummary | null;
@@ -46,15 +47,17 @@ export default function StatisticsCard({ stats, loading, error }: Props) {
     "Overview"
   );
 
+  const dark = useDashboardStore((s) => s.dark);
   // control styles
   const tabBase =
     "px-3 py-1 rounded-lg h-11 text-sm transition-colors select-none cursor-pointer";
-  const activeTabCls = "bg-white text-gray-800 shadow-sm font-medium"; // active button
+  const activeTabCls =
+    "bg-white text-gray-800 dark:bg-[#1D2939] dark:text-[#FFFFFFE5] shadow-sm font-medium"; // active button
   const inactiveTabCls = "text-gray-500";
 
   if (loading) {
     return (
-      <div className="w-[328px] md:w-[1100px] h-[200px] bg-white rounded-2xl shadow-sm p-6 flex items-center justify-center">
+      <div className="w-[328px] md:w-[1100px] h-[200px] bg-white dark:bg-[#101828] rounded-2xl shadow-sm p-6 flex items-center justify-center">
         <LoadingSpinner label="Loading statistics…" />
       </div>
     );
@@ -62,7 +65,7 @@ export default function StatisticsCard({ stats, loading, error }: Props) {
 
   if (error) {
     return (
-      <div className="w-[328px] md:w-[1100px] h-[200px] bg-white rounded-2xl shadow-sm p-6 flex items-center justify-center">
+      <div className="w-[328px] md:w-[1100px] h-[200px] bg-white dark:bg-[#101828] rounded-2xl shadow-sm p-6 flex items-center justify-center">
         <div className="text-sm text-red-600">{error}</div>
       </div>
     );
@@ -76,12 +79,18 @@ export default function StatisticsCard({ stats, loading, error }: Props) {
       }))
     : data;
 
+  // theme-aware colors for the chart
+  const gridStroke = dark ? "#1D2939" : "#F3F4F6";
+  const tickColor = dark ? "#98A2B3" : "#9CA3AF";
+  const tooltipBg = dark ? "#111827" : "#ffffff";
+  const tooltipText = dark ? "#FFFFFFE5" : "#111827";
+
   return (
-    <div className="w-[328px] md:w-[1100px] min-h-[400px] bg-white rounded-2xl shadow-sm p-6 overflow-hidden">
+    <div className="w-[328px] md:w-[1100px] min-h-[400px] bg-white dark:bg-[#101828] rounded-2xl shadow-sm p-6 overflow-hidden">
       {/* Header */}
       <div className="flex flex-col md:flex-row items-start gap-y-4 md:gap-y-0 justify-between mb-4">
         <div>
-          <h3 className="text-lg font-semibold leading-7 text-[#1D2939]">
+          <h3 className="text-lg font-semibold leading-7 dark:text-[#FFFFFFE5] text-[#1D2939]">
             Statistics
           </h3>
           <p className="text-sm leading-5 text-[#667085] mt-1">
@@ -91,7 +100,7 @@ export default function StatisticsCard({ stats, loading, error }: Props) {
 
         <div className="flex items-center space-x-3">
           {/* Segmented control */}
-          <div className="bg-gray-50 h-11 rounded-lg flex items-center">
+          <div className="bg-gray-50 dark:bg-[#101828] h-11 rounded-lg flex items-center">
             <button
               onClick={() => setActiveTab("Overview")}
               className={`${tabBase} ${
@@ -119,7 +128,7 @@ export default function StatisticsCard({ stats, loading, error }: Props) {
           </div>
 
           {/* Date range button */}
-          <button className="inline-flex items-center h-11 gap-2 px-3 py-1 rounded-[8px] border border-[#D0D5DD] text-sm text-gray-700 hover:bg-gray-50">
+          <button className="inline-flex items-center h-11 gap-2 px-3 py-1 rounded-[8px] border border-[#D0D5DD] dark:border-[#344054] dark:bg-[#1D2939] text-sm text-[#344054] dark:text-[#98A2B3] hover:bg-gray-50 hover:dark:bg-[#101828]">
             {/* calendar icon (inline SVG) */}
             <svg
               width="20"
@@ -137,7 +146,7 @@ export default function StatisticsCard({ stats, loading, error }: Props) {
               />
             </svg>
 
-            <span className="hidden md:block leading-5 text-sm font-medium text-[#344054]">
+            <span className="hidden md:block leading-5 text-sm font-medium text-[#344054] dark:text-[#98A2B3]">
               05 Feb - 06 March
             </span>
           </button>
@@ -168,14 +177,14 @@ export default function StatisticsCard({ stats, loading, error }: Props) {
               <CartesianGrid
                 horizontal={true}
                 vertical={false}
-                stroke="#F3F4F6"
+                stroke={gridStroke}
               />
 
               {/* Y Axis with ticks 0..1000 (6 ticks) */}
               <YAxis
                 domain={[0, 1000]}
                 tickCount={6}
-                tick={{ fill: "#9CA3AF", fontSize: 12 }}
+                tick={{ fill: tickColor, fontSize: 12 }}
                 axisLine={false}
                 tickLine={false}
                 width={48}
@@ -184,7 +193,7 @@ export default function StatisticsCard({ stats, loading, error }: Props) {
               {/* X Axis months */}
               <XAxis
                 dataKey="month"
-                tick={{ fill: "#9CA3AF", fontSize: 12 }}
+                tick={{ fill: tickColor, fontSize: 12 }}
                 axisLine={false}
                 tickLine={false}
                 padding={{ left: 10, right: 10 }}
@@ -193,8 +202,13 @@ export default function StatisticsCard({ stats, loading, error }: Props) {
 
               {/* Tooltip (custom styling left as default) */}
               <Tooltip
-                contentStyle={{ borderRadius: 8, border: "none" }}
-                itemStyle={{ color: "#111827" }}
+                contentStyle={{
+                  borderRadius: 8,
+                  border: "none",
+                  backgroundColor: tooltipBg,
+                  color: tooltipText,
+                }}
+                itemStyle={{ color: tooltipText }}
               />
 
               {/* Areas */}

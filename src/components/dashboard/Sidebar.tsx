@@ -174,7 +174,7 @@ export default function Sidebar() {
 
       {/* Desktop sidebar (keeps original behavior) */}
       <aside
-        className={`hidden md:flex flex-col border-r border-gray-200 bg-white transition-all duration-200 ease-in-out overflow-hidden ${
+        className={`hidden md:flex flex-col border-r border-gray-200 bg-white dark:bg-[#101828] transition-all duration-200 ease-in-out overflow-hidden ${
           collapsed ? "w-20 py-8 px-2" : "w-[290px] py-8 px-5"
         }`}
         aria-label="Sidebar"

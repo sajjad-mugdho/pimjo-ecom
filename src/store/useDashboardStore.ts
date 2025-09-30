@@ -12,6 +12,10 @@ type State = {
   openMobile: () => void;
   closeMobile: () => void;
   toggleMobile: () => void;
+  // theme
+  dark: boolean;
+  toggleDark: () => void;
+  setDark: (v: boolean) => void;
 };
 
 const initializer: StateCreator<State> = (set) => ({
@@ -22,6 +26,10 @@ const initializer: StateCreator<State> = (set) => ({
   openMobile: () => set({ mobileOpen: true }),
   closeMobile: () => set({ mobileOpen: false }),
   toggleMobile: () => set((s) => ({ mobileOpen: !s.mobileOpen })),
+  // theme defaults to false (light)
+  dark: false,
+  toggleDark: () => set((s) => ({ dark: !s.dark })),
+  setDark: (v: boolean) => set({ dark: v }),
 });
 
 export const useDashboardStore = create<State>(initializer);

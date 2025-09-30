@@ -107,14 +107,14 @@ const customerData: CustomerItem[] = [
 export default function DemographicCard({ loading }: Props) {
   if (loading) {
     return (
-      <article className="bg-white rounded-2xl shadow-sm p-4 sm:p-6 w-[328px] sm:w-[413px] min-h-[420px] sm:h-[463px] flex items-center justify-center">
+      <article className="bg-white dark:bg-[#FFFFFF08] rounded-2xl shadow-sm p-4 sm:p-6 w-[328px] sm:w-[413px] min-h-[420px] sm:h-[463px] flex items-center justify-center">
         <LoadingSpinner label="Loading demographics…" />
       </article>
     );
   }
   return (
     <article
-      className="bg-white rounded-2xl shadow-sm p-4 sm:p-6 w-[328px] sm:w-[413px] min-h-[420px] sm:h-[463px] flex flex-col"
+      className="bg-white dark:bg-[#FFFFFF08] rounded-2xl shadow-sm p-4 sm:p-6 w-[328px] sm:w-[413px] min-h-[420px] sm:h-[463px] flex flex-col"
       aria-labelledby="demographic-title"
     >
       {/* Header */}
@@ -148,7 +148,7 @@ export default function DemographicCard({ loading }: Props) {
       </header>
 
       {/* Map */}
-      <div className="mt-5 bg-[#F9FAFB] rounded-xl border border-[#E4E7EC] p-3 sm:p-4 flex-shrink-0">
+      <div className="mt-5 bg-[#F9FAFB] dark:bg-[#101828] rounded-xl border border-[#E4E7EC] p-3 sm:p-4 flex-shrink-0">
         <div className="relative w-full h-[140px] sm:h-[170px] rounded-lg overflow-hidden">
           <Image
             src="/map.svg"
