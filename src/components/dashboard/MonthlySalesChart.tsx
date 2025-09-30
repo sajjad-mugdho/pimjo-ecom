@@ -72,7 +72,10 @@ export default function MonthlySalesChart({ data, loading }: Props) {
         {/* Y axis labels */}
         <div className="w-12 flex flex-col justify-between items-end pr-3 flex-shrink-0">
           {[800, 600, 400, 200, 0].map((label) => (
-            <span key={label} className="text-xs text-gray-400 dark:text-[#98A2B3]">
+            <span
+              key={label}
+              className="text-xs text-gray-400 dark:text-[#98A2B3]"
+            >
               {label}
             </span>
           ))}
@@ -118,7 +121,11 @@ export default function MonthlySalesChart({ data, loading }: Props) {
                         style={{
                           width: 20,
                           height: `${percent}%`,
-                          backgroundColor: isSelected ? "#3758F9" : dark ? "#374151" : "#F2F4F7",
+                          backgroundColor: isSelected
+                            ? "#3758F9"
+                            : dark
+                            ? "#374151"
+                            : "#F2F4F7",
                           borderTopLeftRadius: 8,
                           borderTopRightRadius: 8,
                           cursor: "pointer",
@@ -126,7 +133,9 @@ export default function MonthlySalesChart({ data, loading }: Props) {
                         className="transition-all"
                       />
                     </div>
-                    <div className="mt-2 text-xs text-[#667085] dark:text-[#98A2B3]">{d.month}</div>
+                    <div className="mt-2 text-xs text-[#667085] dark:text-[#98A2B3]">
+                      {d.month}
+                    </div>
                   </div>
                 );
               })}

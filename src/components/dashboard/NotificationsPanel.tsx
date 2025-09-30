@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import { useDashboardStore } from "@/store/useDashboardStore";
 
 type Notification = {
   id: string;
@@ -59,20 +60,18 @@ export default function NotificationsPanel({
   onClose?: () => void;
   items?: Notification[];
 }) {
+  const dark = useDashboardStore((s) => s.dark);
   return (
     <div
       role="dialog"
       aria-label="Notifications"
-      className="w-[361px] bg-white rounded-[16px] shadow-lg"
+      className="w-[361px] bg-white dark:bg-[#101828] rounded-[16px] shadow-lg"
       style={{ boxShadow: "0px 8px 24px rgba(0,0,0,0.1)" }}
     >
       <div className="px-6 pt-6 pb-4">
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
-          <h3
-            className="text-[20px] font-semibold"
-            style={{ color: "#111827" }}
-          >
+          <h3 className="text-[20px] font-semibold text-[#111827] dark:text-[#FFFFFFE5]">
             Notifications
           </h3>
           <button
@@ -107,7 +106,7 @@ export default function NotificationsPanel({
             <div key={it.id}>
               <div className="flex items-start py-4">
                 <div className="relative mr-3" style={{ minWidth: 40 }}>
-                  <div className="h-10 w-10 rounded-full overflow-hidden bg-gray-100">
+                  <div className="h-10 w-10 rounded-full overflow-hidden bg-gray-100 dark:bg-[#1D2939]">
                     <Image
                       src={it.avatar}
                       alt={it.name}
@@ -133,18 +132,12 @@ export default function NotificationsPanel({
                 </div>
 
                 <div className="flex-1">
-                  <div
-                    className="text-sm leading-[1.5]"
-                    style={{ color: "#374151" }}
-                  >
+                  <div className="text-sm leading-[1.5] text-[#374151] dark:text-[#FFFFFFE5]">
                     <span className="font-bold">{it.name}</span>
                     <span className="font-normal"> {it.message} </span>
                     <span className="font-bold">{it.project}</span>
                   </div>
-                  <div
-                    className="flex items-center text-xs mt-1"
-                    style={{ color: "#6B7280" }}
-                  >
+                  <div className="flex items-center text-xs mt-1 text-[#6B7280] dark:text-[#98A2B3]">
                     <span>{"Project"}</span>
                     <span className="mx-2">•</span>
                     <span>{it.time}</span>
@@ -154,7 +147,7 @@ export default function NotificationsPanel({
 
               {/* divider except last */}
               {idx !== items.length - 1 && (
-                <div className="border-t" style={{ borderColor: "#E5E7EB" }} />
+                <div className="border-t border-gray-200 dark:border-[#1D2939]" />
               )}
             </div>
           ))}
@@ -164,12 +157,9 @@ export default function NotificationsPanel({
         <div className="flex  w-full justify-center pt-4 pb-4">
           <button
             type="button"
-            className="text-sm  w-full font-medium rounded-md"
+            className="text-sm w-full font-medium rounded-md text-[#374151] dark:text-[#FFFFFFE5] bg-[#FFFFFF] dark:bg-[#1D2939] border border-[#D1D5DB] dark:border-[#1D2939] hover:bg-gray-50 dark:hover:bg-[#101828]"
             style={{
               padding: "10px 20px",
-              color: "#374151",
-              background: "#FFFFFF",
-              border: "1px solid #D1D5DB",
               borderRadius: 8,
             }}
           >
@@ -183,7 +173,7 @@ export default function NotificationsPanel({
           width: 4px;
         }
         .notifications-scroll::-webkit-scrollbar-thumb {
-          background: #e4e7ec;
+          background: ${dark ? "#1D2939" : "#e4e7ec"};
           border-radius: 999px;
         }
         .notifications-scroll::-webkit-scrollbar-track {

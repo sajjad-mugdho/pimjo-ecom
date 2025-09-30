@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useDashboardStore } from "@/store/useDashboardStore";
 
 type Props = {
   onSignOut?: () => void;
@@ -12,19 +12,20 @@ type Props = {
 export default function ProfileDropdown({ onSignOut, onClose }: Props) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const dark = useDashboardStore((s) => s.dark);
   return (
     <div
-      className="bg-white rounded-[12px] shadow-[0_4px_12px_rgba(0,0,0,0.1)]"
+      className="bg-white dark:bg-[#101828] rounded-[12px] shadow-[0_4px_12px_rgba(0,0,0,0.1)]"
       style={{ width: 280, padding: 16 }}
     >
       {/* User info */}
       <div className="flex px-3 flex-col mb-4">
         <div className="flex items-center gap-1">
           <div className="flex flex-col">
-            <span className="text-sm font-medium text-[#344054] leading-5">
+            <span className="text-sm font-medium text-[#344054] dark:text-[#FFFFFFE5] leading-5">
               Sajjad Hossen
             </span>
-            <span className="text-sm text-[#6B7280] leading-5 font-normal ">
+            <span className="text-sm text-[#6B7280] dark:text-[#98A2B3] leading-5 font-normal ">
               sajjadmugdho@gmail.com
             </span>
           </div>
@@ -35,7 +36,7 @@ export default function ProfileDropdown({ onSignOut, onClose }: Props) {
       <div className="flex flex-col">
         <button
           type="button"
-          className="flex items-center gap-3 px-3 py-2 rounded-[8px] hover:bg-[#F3F4F6] text-[#344054] text-sm leading-5"
+          className="flex items-center gap-3 px-3 py-2 rounded-[8px] hover:bg-[#F3F4F6] dark:hover:bg-[#1D2939] text-[#344054] dark:text-[#FFFFFFE5] text-sm leading-5"
           onClick={() => {
             if (onClose) onClose();
           }}
@@ -61,7 +62,7 @@ export default function ProfileDropdown({ onSignOut, onClose }: Props) {
 
         <button
           type="button"
-          className="flex items-center gap-3 px-3 py-2 mt-2 rounded-[8px] hover:bg-[#F3F4F6] text-[#344054] text-sm leading-5"
+          className="flex items-center gap-3 px-3 py-2 mt-2 rounded-[8px] hover:bg-[#F3F4F6] dark:hover:bg-[#1D2939] text-[#344054] dark:text-[#FFFFFFE5] text-sm leading-5"
           onClick={() => {
             if (onClose) onClose();
           }}
@@ -94,7 +95,7 @@ export default function ProfileDropdown({ onSignOut, onClose }: Props) {
 
         <button
           type="button"
-          className="flex items-center gap-3 px-3 py-2 mt-2 rounded-[8px] hover:bg-[#F3F4F6] text-[#344054] text-sm leading-5"
+          className="flex items-center gap-3 px-3 py-2 mt-2 rounded-[8px] hover:bg-[#F3F4F6] dark:hover:bg-[#1D2939] text-[#344054] dark:text-[#FFFFFFE5] text-sm leading-5"
           onClick={() => {
             if (onClose) onClose();
           }}
@@ -125,11 +126,11 @@ export default function ProfileDropdown({ onSignOut, onClose }: Props) {
           <span className="font-medium">Support</span>
         </button>
 
-        <div className="my-2 border-t" style={{ borderColor: "#E5E7EB" }} />
+        <div className="my-2 border-t border-gray-200 dark:border-[#1D2939]" />
 
         <button
           type="button"
-          className="flex items-center gap-3 px-3 py-2 rounded-[8px] hover:bg-[#F3F4F6] text-[#344054] text-sm leading-5"
+          className="flex items-center gap-3 px-3 py-2 rounded-[8px] hover:bg-[#F3F4F6] dark:hover:bg-[#1D2939] text-[#344054] dark:text-[#FFFFFFE5] text-sm leading-5"
           onClick={async () => {
             try {
               setLoading(true);
