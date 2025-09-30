@@ -56,13 +56,13 @@ export default function Sidebar() {
 
       {/* Mobile off-canvas sidebar */}
       <aside
-        className={`fixed top-16 left-0 bottom-0 z-40 md:hidden transform transition-transform duration-200 ease-in-out bg-white border-r border-gray-200 overflow-auto ${
+        className={`fixed top-16 left-0 bottom-0 z-40 md:hidden transform transition-transform duration-200 ease-in-out bg-white dark:bg-[#101828] border-r border-gray-200 dark:border-[#1D2939] overflow-auto ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         } w-[70%]`}
         aria-label="Mobile Sidebar"
       >
         <nav className="px-2 py-4">
-          <p className="text-xs font-normal leading-5 text-[#6B7280] mb-6 mx-2">
+          <p className="text-xs font-normal leading-5 text-[#6B7280] dark:text-[#98A2B3] mb-6 mx-2">
             MENU
           </p>
           <ul className="space-y-1">
@@ -70,14 +70,18 @@ export default function Sidebar() {
               const active = bestMatchHref
                 ? item.href === bestMatchHref
                 : pathname === item.href;
-              const colorClass = active ? "text-[#3758F9]" : "text-[#344054]";
+              const colorClass = active
+                ? "text-[#3758F9]"
+                : "text-[#344054] dark:text-[#FFFFFFE5]";
               return (
                 <li key={item.href}>
                   <Link
                     href={item.href}
                     onClick={closeMobile}
-                    className={`flex items-center gap-3 w-full px-3 py-2 rounded-md transition-colors hover:bg-gray-100 ${
-                      active ? "bg-[#ECF3FF] font-medium" : ""
+                    className={`flex items-center gap-3 w-full px-3 py-2 rounded-md transition-colors hover:bg-gray-100 dark:hover:bg-[#1D2939] ${
+                      active
+                        ? "bg-[#ECF3FF] dark:bg-[#465FFF1F] font-medium"
+                        : ""
                     }`}
                   >
                     <span
@@ -216,7 +220,7 @@ export default function Sidebar() {
         </div>
 
         <nav className="flex-1 px-2 py-4">
-          <p className="text-xs font-normal leading-5 text-[#6B7280] mb-6 mx-2">
+          <p className="text-xs font-normal leading-5 text-[#6B7280] dark:text-[#98A2B3] mb-6 mx-2">
             MENU
           </p>
           <ul className="space-y-1">
@@ -224,7 +228,9 @@ export default function Sidebar() {
               const active = bestMatchHref
                 ? item.href === bestMatchHref
                 : pathname === item.href;
-              const colorClass = active ? "text-[#3758F9]" : "text-[#344054]";
+              const colorClass = active
+                ? "text-[#3758F9]"
+                : "text-[#344054] dark:text-[#FFFFFFE5]";
               return (
                 <li key={item.href}>
                   <Link
