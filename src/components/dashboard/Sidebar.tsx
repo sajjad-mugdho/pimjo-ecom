@@ -9,6 +9,7 @@ export default function Sidebar() {
   const collapsed = useDashboardStore((s) => s.collapsed);
   const mobileOpen = useDashboardStore((s) => s.mobileOpen);
   const closeMobile = useDashboardStore((s) => s.closeMobile);
+  const dark = useDashboardStore((s) => s.dark);
 
   const navItems = [
     { label: "Dashboard", href: "/dashboard" },
@@ -60,32 +61,6 @@ export default function Sidebar() {
         } w-[70%]`}
         aria-label="Mobile Sidebar"
       >
-        {/* <div className="h-16 flex items-center justify-start px-4">
-          <Link
-            href="/dashboard"
-            className="flex items-start gap-2"
-            onClick={closeMobile}
-          >
-            <div className="">
-              <svg
-                width="23"
-                height="28"
-                viewBox="0 0 23 28"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
-                  d="M7.29192 21.5043C8.47559 21.9353 9.75319 22.1703 11.0851 22.1703C17.2073 22.1703 22.1703 17.2073 22.1703 11.0852C22.1703 4.963 17.2073 0 11.0851 0C4.96299 0 0 4.96307 0 11.0852V26.9139C0 27.913 1.23714 28.3801 1.8975 27.6302C3.69564 25.5882 5.49378 23.5462 7.29192 21.5043ZM15.9303 11.0852C15.9303 13.7611 13.7611 15.9304 11.0851 15.9304C8.40921 15.9304 6.23994 13.7611 6.23994 11.0852C6.23994 8.40922 8.40921 6.23995 11.0851 6.23995C13.7611 6.23995 15.9303 8.40922 15.9303 11.0852Z"
-                  fill="#3758F9"
-                />
-              </svg>
-            </div>
-            <span className="text-lg font-semibold">Pimjo</span>
-          </Link>
-        </div> */}
-
         <nav className="px-2 py-4">
           <p className="text-xs font-normal leading-5 text-[#6B7280] mb-6 mx-2">
             MENU
@@ -174,7 +149,7 @@ export default function Sidebar() {
 
       {/* Desktop sidebar (keeps original behavior) */}
       <aside
-        className={`hidden md:flex flex-col border-r border-gray-200 bg-white dark:bg-[#101828] transition-all duration-200 ease-in-out overflow-hidden ${
+        className={`hidden md:flex flex-col border-r border-gray-200 dark:border-[#1D2939] bg-white dark:bg-[#101828] transition-all duration-200 ease-in-out overflow-hidden ${
           collapsed ? "w-20 py-8 px-2" : "w-[290px] py-8 px-5"
         }`}
         aria-label="Sidebar"
@@ -210,29 +185,29 @@ export default function Sidebar() {
                     fill-rule="evenodd"
                     clip-rule="evenodd"
                     d="M0.363201 1.48291H8.98125C10.5363 1.48291 11.9184 1.76931 13.1211 2.34948C14.3464 2.9107 15.3069 3.74496 15.9956 4.85069C16.6879 5.94196 17.0273 7.26479 17.0273 8.80648C17.0273 10.3306 16.6768 11.6533 15.9647 12.7637C15.2764 13.8481 14.3272 14.6813 13.1235 15.2624C11.9201 15.8433 10.5373 16.13 8.98125 16.13H4.95573V24.4086H0.363201V1.48291ZM12.0166 7.12479C11.409 6.07169 10.2157 5.59375 9.04145 5.59375H4.95573V12.0192H9.04145C10.9485 12.0192 12.4348 10.7317 12.4348 8.80648C12.4348 8.14016 12.2923 7.58435 12.0187 7.12847L12.0166 7.12479Z"
-                    fill="#232939"
+                    fill={dark ? "#FFFFFFE5" : "#1D2939"}
                   />
                   <path
                     fill-rule="evenodd"
                     clip-rule="evenodd"
                     d="M19.8836 24.4086V1.48291H24.4761V24.4086H19.8836Z"
-                    fill="#232939"
+                    fill={dark ? "#FFFFFFE5" : "#1D2939"}
                   />
                   <path
                     fill-rule="evenodd"
                     clip-rule="evenodd"
                     d="M32.5801 1.48291L39.9075 11.4366L47.0773 1.48291H51.3676V24.4086H46.745V9.66205L40.1949 18.3878H39.4623L32.884 9.40218V24.4086H28.2914V1.48291H32.5801Z"
-                    fill="#232939"
+                    fill={dark ? "#FFFFFFE5" : "#1D2939"}
                   />
                   <path
                     fill-rule="evenodd"
                     clip-rule="evenodd"
                     d="M90.1104 12.9458C90.1104 19.5607 84.7484 24.923 78.1334 24.923C71.5184 24.923 66.1564 19.5607 66.1564 12.9458C66.1564 6.33108 71.5184 0.96875 78.1334 0.96875C84.7484 0.96875 90.1104 6.33108 90.1104 12.9458ZM78.1334 20.3355C82.2144 20.3355 85.5227 17.027 85.5227 12.9458C85.5227 8.86466 82.2144 5.55623 78.1334 5.55623C74.0524 5.55623 70.744 8.86466 70.744 12.9458C70.744 17.027 74.0524 20.3355 78.1334 20.3355Z"
-                    fill="#232939"
+                    fill={dark ? "#FFFFFFE5" : "#1D2939"}
                   />
                   <path
                     d="M55.7667 20.1473C56.6814 20.1473 57.3764 19.8914 57.8815 19.4042C57.9497 19.3383 58.0136 19.2696 58.0731 19.1981C58.4739 18.718 58.6786 18.1096 58.6786 17.3559V1.48291H63.3013V17.2054C63.3013 18.6267 62.9915 19.8845 62.365 20.971C61.7586 22.0576 60.8801 22.9033 59.7374 23.5064C58.6104 24.1112 57.2841 24.4086 55.7667 24.4086H54.223V20.1473H55.7667Z"
-                    fill="#232939"
+                    fill={dark ? "#FFFFFFE5" : "#1D2939"}
                   />
                 </svg>
               </span>
@@ -254,8 +229,10 @@ export default function Sidebar() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className={`flex items-center gap-3 w-full px-3 py-2 rounded-md transition-colors hover:bg-gray-100 ${
-                      active ? "bg-[#ECF3FF] font-medium" : ""
+                    className={`flex items-center gap-3 w-full px-3 py-2 rounded-md transition-colors hover:bg-gray-100 dark:hover:bg-[#1D2939] dark:hover:text-white ${
+                      active
+                        ? "bg-[#ECF3FF] dark:bg-[#465FFF1F] font-medium"
+                        : ""
                     }`}
                   >
                     <span
@@ -317,7 +294,9 @@ export default function Sidebar() {
                       )}
                     </span>
                     {!collapsed && (
-                      <span className={`${colorClass}`}>{item.label}</span>
+                      <span className={`${colorClass} dark:hover:text-white`}>
+                        {item.label}
+                      </span>
                     )}
                   </Link>
                 </li>
