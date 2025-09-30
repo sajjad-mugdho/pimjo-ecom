@@ -241,10 +241,12 @@ const Productsection: React.FC = () => {
   const pageItems = filtered.slice(start, start + pageSize);
 
   return (
-    <section className="w-[328px] md:w-full bg-white px-4 sm:px-6 py-4 rounded-2xl shadow-sm">
+    <section className="w-[328px] md:w-full bg-white dark:bg-[#FFFFFF08] px-4 sm:px-6 py-4 rounded-2xl shadow-sm border dark:border-[#1D2939]">
       <Toaster />
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-gray-100 pb-4">
-        <h2 className=" text-lg font-semibold p-2">All products</h2>
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-gray-100 dark:border-[#1D2939] pb-4">
+        <h2 className=" text-lg font-semibold p-2 text-gray-900 dark:text-[#FFFFFFE5]">
+          All products
+        </h2>
 
         <div className="flex  items-center gap-3 w-full sm:w-auto">
           <button
@@ -277,14 +279,14 @@ const Productsection: React.FC = () => {
                 setPage(1);
               }}
               placeholder="Search..."
-              className="block w-full pl-10 pr-4 h-11 rounded-lg border border-gray-200 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-primary-100 focus:border-primary-400"
+              className="block w-full pl-10 pr-4 h-11 rounded-lg border border-gray-200 dark:border-[#1D2939] placeholder:text-slate-400 dark:placeholder:text-[#98A2B3] bg-white dark:bg-[#101828] text-gray-900 dark:text-[#FFFFFFE5] focus:outline-none focus:ring-2 focus:ring-primary-100 focus:border-primary-400"
             />
           </div>
 
           <div className="relative" ref={dropdownRef}>
             <button
               onClick={() => setFilterOpen((v) => !v)}
-              className="inline-flex md:min-w-[185px] items-center gap-2 h-11 px-4 rounded-[8px] border border-[#D0D5DD] bg-white text-sm text-slate-700 hover:bg-gray-50"
+              className="inline-flex md:min-w-[185px] items-center gap-2 h-11 px-4 rounded-[8px] border border-[#D0D5DD] dark:border-[#1D2939] bg-white dark:bg-[#101828] text-sm text-slate-700 dark:text-[#FFFFFFE5] hover:bg-gray-50 dark:hover:bg-[#1D2939]"
             >
               <svg
                 className="w-4 h-4 text-slate-600"
@@ -305,14 +307,14 @@ const Productsection: React.FC = () => {
             </button>
 
             {filterOpen && (
-              <div className="absolute right-0 mt-2 z-50 p-3 bg-white rounded-md shadow-sm border w-56">
-                <div className="text-sm text-slate-700">
+              <div className="absolute right-0 mt-2 z-50 p-3 bg-white dark:bg-[#101828] rounded-md shadow-sm border dark:border-[#1D2939] w-56">
+                <div className="text-sm text-slate-700 dark:text-[#FFFFFFE5]">
                   Filters (placeholder)
                 </div>
                 <div className="mt-2 flex justify-end">
                   <button
                     onClick={() => setFilterOpen(false)}
-                    className="text-sm text-[#667085] px-2 py-1 rounded hover:bg-gray-50"
+                    className="text-sm text-[#667085] dark:text-[#98A2B3] px-2 py-1 rounded hover:bg-gray-50 dark:hover:bg-[#1D2939]"
                   >
                     Close
                   </button>
@@ -325,7 +327,7 @@ const Productsection: React.FC = () => {
 
       <div className="overflow-x-auto mt-4">
         <table className="w-full min-w-[700px] table-auto">
-          <thead className="text-left text-xs text-[#667085]">
+          <thead className="text-left text-xs text-[#667085] dark:text-[#FFFFFFE5] bg-gray-50 dark:bg-[#101828]">
             <tr>
               <th className="min-w-[220px] px-4 py-3 font-medium">Products</th>
               <th className="px-4 py-3 font-medium">Category</th>
@@ -340,7 +342,7 @@ const Productsection: React.FC = () => {
               <tr>
                 <td
                   colSpan={5}
-                  className="px-4 py-10 text-center text-sm text-slate-500"
+                  className="px-4 py-10 text-center text-sm text-slate-500 dark:text-[#98A2B3]"
                 >
                   No products found.
                 </td>
@@ -351,7 +353,7 @@ const Productsection: React.FC = () => {
                 return (
                   <tr
                     key={p.id}
-                    className="border-t border-gray-100 hover:bg-gray-50 transition"
+                    className="border-t border-gray-100 dark:border-[#1D2939] hover:bg-gray-50 dark:hover:bg-[#1D2939] transition"
                   >
                     <td className="font-medium flex items-center gap-3 px-4 py-3">
                       <Image
@@ -362,31 +364,31 @@ const Productsection: React.FC = () => {
                         className="rounded-md object-cover flex-shrink-0"
                       />
                       <div className="min-w-0">
-                        <div className="text-sm font-medium text-slate-900 truncate">
+                        <div className="text-sm font-medium text-slate-900 dark:text-[#FFFFFFE5] truncate">
                           {p.name}
                         </div>
-                        <div className="text-xs text-slate-400">
+                        <div className="text-xs text-slate-400 dark:text-[#98A2B3]">
                           {p.stock} in stock
                         </div>
                       </div>
                     </td>
-                    <td className="text-sm text-[#667085] px-4 py-3">
+                    <td className="text-sm text-[#667085] dark:text-[#98A2B3] px-4 py-3">
                       {p.category}
                     </td>
-                    <td className="text-sm text-[#667085] px-4 py-3 text-right">
+                    <td className="text-sm text-[#667085] dark:text-[#98A2B3] px-4 py-3 text-right">
                       ${p.price.toLocaleString()}
                     </td>
                     <td className="px-4 py-3 text-right">
                       {status === "Delivered" ? (
-                        <span className="inline-flex items-center justify-center text-xs font-medium rounded-full px-2 py-0.5 bg-emerald-50 text-emerald-700">
+                        <span className="inline-flex items-center justify-center text-xs font-medium rounded-full px-2 py-0.5 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400">
                           Delivered
                         </span>
                       ) : status === "Pending" ? (
-                        <span className="inline-flex items-center justify-center text-xs font-medium rounded-full px-2 py-0.5 bg-amber-50 text-amber-700">
+                        <span className="inline-flex items-center justify-center text-xs font-medium rounded-full px-2 py-0.5 bg-amber-50 dark:bg-amber-900/20 text-amber-700 dark:text-amber-400">
                           Pending
                         </span>
                       ) : (
-                        <span className="inline-flex items-center justify-center text-xs font-medium rounded-full px-2 py-0.5 bg-red-50 text-red-700">
+                        <span className="inline-flex items-center justify-center text-xs font-medium rounded-full px-2 py-0.5 bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400">
                           Cancelled
                         </span>
                       )}
@@ -399,7 +401,7 @@ const Productsection: React.FC = () => {
                           onClick={() =>
                             setMenuOpenId(menuOpenId === p.id ? null : p.id)
                           }
-                          className="w-8 h-8 inline-flex items-center justify-center rounded-md bg-white text-slate-600 hover:bg-gray-50"
+                          className="w-8 h-8 inline-flex items-center justify-center rounded-md bg-white dark:bg-[#101828] text-slate-600 dark:text-[#FFFFFFE5] hover:bg-gray-50 dark:hover:bg-[#1D2939]"
                           title="Actions"
                         >
                           {/* three dots vertical */}
@@ -424,13 +426,13 @@ const Productsection: React.FC = () => {
                             ref={menuRef}
                             className="absolute right-0 mt-2 w-56 z-50"
                           >
-                            <div className="bg-white rounded-[12px] shadow-[0_4px_12px_rgba(0,0,0,0.1)] p-2">
+                            <div className="bg-white dark:bg-[#101828] rounded-[12px] shadow-[0_4px_12px_rgba(0,0,0,0.1)] p-2">
                               <button
                                 onClick={() => {
                                   setMenuOpenId(null);
                                   openEdit(p);
                                 }}
-                                className="w-full flex items-center gap-3 px-3 py-2 rounded-[8px] hover:bg-[#F3F4F6] text-[#344054] text-sm"
+                                className="w-full flex items-center gap-3 px-3 py-2 rounded-[8px] hover:bg-[#F3F4F6] dark:hover:bg-[#1D2939] text-[#344054] dark:text-[#FFFFFFE5] text-sm"
                               >
                                 <svg
                                   className="w-4 h-4 text-slate-600"
@@ -455,7 +457,7 @@ const Productsection: React.FC = () => {
                                   setMenuOpenId(null);
                                   deleteProduct(p.id);
                                 }}
-                                className="w-full flex items-center gap-3 px-3 py-2 mt-2 rounded-[8px] hover:bg-[#FEF3F2] text-[#344054] text-sm"
+                                className="w-full flex items-center gap-3 px-3 py-2 mt-2 rounded-[8px] hover:bg-[#FEF3F2] dark:hover:bg-red-900/20 text-[#344054] dark:text-[#FFFFFFE5] text-sm"
                               >
                                 <svg
                                   className="w-4 h-4 text-red-600"
@@ -471,7 +473,7 @@ const Productsection: React.FC = () => {
                                   <path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6" />
                                   <path d="M10 11v6M14 11v6" />
                                 </svg>
-                                <span className="text-red-600 font-medium">
+                                <span className="text-red-600 dark:text-red-400 font-medium">
                                   Delete
                                 </span>
                               </button>
@@ -489,11 +491,11 @@ const Productsection: React.FC = () => {
       </div>
 
       {/* Pagination */}
-      <div className="mt-4 border-t border-gray-100 pt-4 flex  items-center justify-between gap-4">
+      <div className="mt-4 border-t border-gray-100 dark:border-[#1D2939] pt-4 flex  items-center justify-between gap-4">
         <div className="flex items-center gap-4">
           <button
             onClick={() => changePage(page - 1)}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 text-sm ${
+            className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 dark:border-[#1D2939] text-sm text-gray-900 dark:text-[#FFFFFFE5] hover:bg-gray-50 dark:hover:bg-[#1D2939] ${
               page <= 1 ? "opacity-50" : ""
             }`}
             disabled={page <= 1}
@@ -529,7 +531,7 @@ const Productsection: React.FC = () => {
                     className={`w-10 h-10 inline-flex items-center justify-center rounded-lg text-sm ${
                       isActive
                         ? "bg-[#3758F9] text-white shadow"
-                        : "bg-white ring-1 ring-inset ring-gray-100 text-slate-700 hover:bg-gray-50"
+                        : "bg-white dark:bg-[#101828] ring-1 ring-inset ring-gray-100 dark:ring-[#1D2939] text-slate-700 dark:text-[#FFFFFFE5] hover:bg-gray-50 dark:hover:bg-[#1D2939]"
                     }`}
                   >
                     {p}
@@ -543,7 +545,7 @@ const Productsection: React.FC = () => {
         <div className="flex items-center gap-4">
           <button
             onClick={() => changePage(page + 1)}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 text-sm ${
+            className={`inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 dark:border-[#1D2939] text-sm text-gray-900 dark:text-[#FFFFFFE5] hover:bg-gray-50 dark:hover:bg-[#1D2939] ${
               page >= totalPages ? "opacity-50" : ""
             }`}
             disabled={page >= totalPages}
@@ -569,56 +571,56 @@ const Productsection: React.FC = () => {
       </div>
       {/* Add / Edit modal (simple) */}
       {showForm && (
-        <div className="fixed inset-0 z-50  flex items-center justify-center">
-          <div className="w-full max-w-[328px] bg-white rounded-xl shadow-lg p-6">
-            <h3 className="text-lg font-semibold mb-4">
+        <div className="fixed inset-0 z-50 bg-black bg-opacity-50 dark:bg-black dark:bg-opacity-50 flex items-center justify-center">
+          <div className="w-full max-w-[328px] bg-white dark:bg-[#101828] rounded-xl shadow-lg p-6 border dark:border-[#1D2939]">
+            <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-[#FFFFFFE5]">
               {editing ? "Edit product" : "Add product"}
             </h3>
             <div className="grid grid-cols-1 gap-3">
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700 dark:text-[#98A2B3]">
                 Product name
               </label>
               <input
                 value={formName}
                 onChange={(e) => setFormName(e.target.value)}
                 placeholder="Name"
-                className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#3758F9]"
+                className="w-full h-12 px-3 py-2 border border-gray-300 dark:border-[#1D2939] rounded-md text-sm text-gray-700 dark:text-[#FFFFFFE5] bg-white dark:bg-[#101828] placeholder:text-gray-500 dark:placeholder:text-[#98A2B3] focus:outline-none focus:ring-1 focus:ring-[#3758F9]"
               />
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700 dark:text-[#98A2B3]">
                 Price
               </label>
               <input
                 value={String(formPrice)}
                 onChange={(e) => setFormPrice(e.target.value)}
                 placeholder="Price"
-                className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#3758F9]"
+                className="w-full h-12 px-3 py-2 border border-gray-300 dark:border-[#1D2939] rounded-md text-sm text-gray-700 dark:text-[#FFFFFFE5] bg-white dark:bg-[#101828] placeholder:text-gray-500 dark:placeholder:text-[#98A2B3] focus:outline-none focus:ring-1 focus:ring-[#3758F9]"
               />
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700 dark:text-[#98A2B3]">
                 Stock
               </label>
               <input
                 value={String(formStock)}
                 onChange={(e) => setFormStock(e.target.value)}
                 placeholder="Stock"
-                className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#3758F9]"
+                className="w-full h-12 px-3 py-2 border border-gray-300 dark:border-[#1D2939] rounded-md text-sm text-gray-700 dark:text-[#FFFFFFE5] bg-white dark:bg-[#101828] placeholder:text-gray-500 dark:placeholder:text-[#98A2B3] focus:outline-none focus:ring-1 focus:ring-[#3758F9]"
               />
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700 dark:text-[#98A2B3]">
                 Category
               </label>
               <input
                 value={formCategory}
                 onChange={(e) => setFormCategory(e.target.value)}
                 placeholder="Category"
-                className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#3758F9]"
+                className="w-full h-12 px-3 py-2 border border-gray-300 dark:border-[#1D2939] rounded-md text-sm text-gray-700 dark:text-[#FFFFFFE5] bg-white dark:bg-[#101828] placeholder:text-gray-500 dark:placeholder:text-[#98A2B3] focus:outline-none focus:ring-1 focus:ring-[#3758F9]"
               />
-              <label className="block text-sm font-medium text-gray-700">
+              <label className="block text-sm font-medium text-gray-700 dark:text-[#98A2B3]">
                 Image local path
               </label>
               <input
                 value={formImage}
                 onChange={(e) => setFormImage(e.target.value)}
                 placeholder="Image path"
-                className="w-full h-12 px-3 py-2 border border-gray-300 rounded-md text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#3758F9]"
+                className="w-full h-12 px-3 py-2 border border-gray-300 dark:border-[#1D2939] rounded-md text-sm text-gray-700 dark:text-[#FFFFFFE5] bg-white dark:bg-[#101828] placeholder:text-gray-500 dark:placeholder:text-[#98A2B3] focus:outline-none focus:ring-1 focus:ring-[#3758F9]"
               />
             </div>
 
@@ -629,7 +631,7 @@ const Productsection: React.FC = () => {
                   setEditing(null);
                   resetForm();
                 }}
-                className="px-3 py-2 rounded bg-white border"
+                className="px-3 py-2 rounded bg-white dark:bg-[#101828] border dark:border-[#1D2939] text-gray-900 dark:text-[#FFFFFFE5] hover:bg-gray-50 dark:hover:bg-[#1D2939]"
               >
                 Cancel
               </button>
