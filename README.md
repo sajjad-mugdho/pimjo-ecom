@@ -1,85 +1,120 @@
-# Pimjo E‑commerce (Next.js App Router)
+# Pimjo E-commerce (Next.js App Router)
+
+A mini eCommerce web app built as a submission for the FED25 assignment. Features a pixel-perfect landing page from Figma, authentication, and a protected dashboard with custom APIs.
 
 Live demo: https://pimjo-ecom-dusky.vercel.app/
 
----
+## Features
+
+- **Landing Page**: Pixel-perfect responsive design from Figma using Tailwind CSS
+- **Authentication**: Login/Register with custom API routes
+- **Dashboard**: Protected eCommerce dashboard with summary stats, products, and orders
+- **CRUD Operations**: Full Create, Read, Update, Delete for products
+- **Search & Filter**: Product search and filtering functionality
+- **Dark Mode**: Complete dark mode support across the app
+- **Custom APIs**: In-app mock APIs for products, orders, and stats
+- **Loading & Error States**: Proper handling for API fetches
+
+## Tech Stack
+
+- **Framework**: Next.js (App Router)
+- **Styling**: Tailwind CSS
+- **State Management**: Zustand
+- **Authentication**: Custom API with httpOnly cookies
+- **Data**: Mock in-memory JSON data
 
 ## Prerequisites
 
-- Node.js 18+ or later (recommended 18.x or 20.x).
-- npm, yarn, or pnpm as the package manager.
-- Git (to clone the repository).
+- Node.js 18+ or later (recommended 18.x or 20.x)
+- npm, yarn, or pnpm as package manager
+- Git
 
-Verify Node.js and npm are inKeep it short: this repo is a working submission for the assignment - Landing Page, Auth, Dashboard + APIs.stalled:
+Verify installation:
 
 ```bash
 node -v
 npm -v
 ```
 
----
+## Installation
 
-## Quick start (development)
-
-1. Clone and install
+1. Clone the repository:
 
 ```bash
 git clone <repo-url>
 cd ecom-pimjo
+```
+
+2. Install dependencies:
+
+```bash
 npm install
 ```
 
-2. Run
+3. Run the development server:
 
 ```bash
 npm run dev
 ```
 
-3. Visit
+4. Open your browser and visit:
+   - http://localhost:3000 — Landing page
+   - http://localhost:3000/sign-in — Login page
+   - http://localhost:3000/dashboard — Protected dashboard
 
-- http://localhost:3000 — landing
-- http://localhost:3000/sign-in — login
-- http://localhost:3000/dashboard — dashboard (protected)
+## Authentication
 
-Auth (dev-only)
+- **Credentials**: `admin@example.com` / `admin123` (hard-coded for demo)
+- **Sign-in**: `POST /api/auth/signin` — Sets httpOnly cookie `token` (expires in 1 hour)
+- **Sign-out**: `POST /api/auth/signout` — Clears the cookie
+- Dashboard routes are protected and redirect to login if not authenticated
 
-- Allowed credentials: `admin@example.com` / `admin123` (hard-coded)
-- Sign-in endpoint: `POST /api/auth/signin` — sets httpOnly cookie `token` (1 hour)
-- Sign-out endpoint: `POST /api/auth/signout` — clears cookie
+## API Endpoints
 
-# Pimjo E‑commerce — FED25 assignment (short)
+The app includes custom Next.js API routes serving mock data:
 
-Mini eCommerce: Landing page (Tailwind), simple auth, and a protected dashboard backed by in-app mock APIs.
+- `GET /api/products` — Returns list of products
+- `POST /api/products` — Create new product
+- `PUT /api/products` — Update existing product
+- `DELETE /api/products?id={id}` — Delete product by ID
+- `GET /api/orders` — Returns list of orders
+- `GET /api/stats` — Returns dashboard summary statistics
 
-Quick start
+## Project Structure
 
-```bash
-git clone <repo-url>
-cd ecom-pimjo
-npm install
-npm run dev
+```
+src/
+├── app/
+│   ├── api/
+│   │   ├── auth/
+│   │   ├── products/
+│   │   ├── orders/
+│   │   └── stats/
+│   ├── (auth)/
+│   ├── (dashboard)/
+│   └── ...
+├── components/
+│   ├── dashboard/
+│   ├── homepage/
+│   ├── Products/
+│   └── ui/
+├── lib/
+│   ├── api.ts
+│   └── mockData.ts
+├── store/
+└── types.ts
 ```
 
-Open: http://localhost:3000 (landing) — /sign-in (login) — /dashboard (protected)
+## Scripts
 
-Auth (dev)
+- `npm run dev` — Start development server
+- `npm run build` — Build for production
+- `npm start` — Start production server
+- `npm run lint` — Run ESLint
 
-- Use: admin@example.com / admin123
-- POST /api/auth/signin (sets httpOnly cookie `token`) — POST /api/auth/signout (clears it)
+## Notes
 
-Dashboard APIs (mock)
-
-- GET /api/products
-- GET /api/orders
-- GET /api/stats
-
-Scripts
-
-- `npm run dev`, `npm run build`, `npm start`, `npm run lint`
-
-Notes
-
-- Images in `public/` should be referenced with a leading slash (for `next/image`).
-- The auth token is a demo base64 string — replace with NextAuth or a proper session for production.
-
-Want me to: add CRUD APIs, persist sidebar state, or convert auth to NextAuth? Say which and I'll open a branch.
+- Images in `public/` are referenced with leading slash for `next/image`
+- Auth token is a demo base64 string — use NextAuth or proper sessions for production
+- Mock data resets on server restart
+- All styling uses Tailwind CSS utility classes only
