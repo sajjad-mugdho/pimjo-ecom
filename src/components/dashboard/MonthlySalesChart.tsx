@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
+import { useDashboardStore } from "@/store/useDashboardStore";
 
 type DataPoint = { month: string; sales: number };
 
@@ -29,26 +30,27 @@ type Props = {
 export default function MonthlySalesChart({ data, loading }: Props) {
   const [selectedMonth, setSelectedMonth] = useState<string>("Mar");
   const salesData = data && data.length ? data : DEFAULT_SALES;
+  const dark = useDashboardStore((s) => s.dark);
 
   if (loading) {
     return (
-      <div className="w-full md:w-[628px] md:h-[288px] bg-white dark:bg-[#FFFFFF08] rounded-xl p-6 shadow-sm flex items-center justify-center">
+      <div className="w-full md:w-[628px] md:h-[288px] bg-white dark:bg-[#FFFFFF08] dark:border dark:border-[#1D2939] rounded-xl p-6 shadow-sm flex items-center justify-center">
         <LoadingSpinner label="Loading chart…" />
       </div>
     );
   }
 
   return (
-    <div className="w-[328px] md:w-[628px] md:min-h-[288px] bg-white dark:bg-[#FFFFFF08] rounded-xl p-6 shadow-sm overflow-hidden">
+    <div className="w-[328px] md:w-[628px] md:min-h-[288px] bg-white dark:bg-[#FFFFFF08] dark:border dark:border-[#1D2939] rounded-xl p-6 shadow-sm overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold leading-7 text-[#1D2939]">
+        <h3 className="text-lg font-semibold leading-7 text-[#1D2939] dark:text-[#FFFFFFE5]">
           Monthly Sales
         </h3>
 
         <button
           aria-label="More"
-          className="inline-flex items-center justify-center h-8 w-8 rounded-full hover:bg-gray-100 text-[#667085]"
+          className="inline-flex items-center justify-center h-8 w-8 rounded-full hover:bg-gray-100 dark:hover:bg-[#1D2939] text-[#667085] dark:text-[#98A2B3]"
         >
           <svg
             width="16"
@@ -70,7 +72,7 @@ export default function MonthlySalesChart({ data, loading }: Props) {
         {/* Y axis labels */}
         <div className="w-12 flex flex-col justify-between items-end pr-3 flex-shrink-0">
           {[800, 600, 400, 200, 0].map((label) => (
-            <span key={label} className="text-xs text-gray-400">
+            <span key={label} className="text-xs text-gray-400 dark:text-[#98A2B3]">
               {label}
             </span>
           ))}
@@ -80,10 +82,10 @@ export default function MonthlySalesChart({ data, loading }: Props) {
         <div className="flex-1 relative min-w-0">
           <div className="absolute inset-0 pointer-events-none">
             <div className="h-full flex flex-col justify-between">
-              <div className="border-t border-gray-100" />
-              <div className="border-t border-gray-100" />
-              <div className="border-t border-gray-100" />
-              <div className="border-t border-gray-100" />
+              <div className="border-t border-gray-100 dark:border-[#1D2939]" />
+              <div className="border-t border-gray-100 dark:border-[#1D2939]" />
+              <div className="border-t border-gray-100 dark:border-[#1D2939]" />
+              <div className="border-t border-gray-100 dark:border-[#1D2939]" />
               <div />
             </div>
           </div>
@@ -116,7 +118,7 @@ export default function MonthlySalesChart({ data, loading }: Props) {
                         style={{
                           width: 20,
                           height: `${percent}%`,
-                          backgroundColor: isSelected ? "#3758F9" : "#F2F4F7",
+                          backgroundColor: isSelected ? "#3758F9" : dark ? "#374151" : "#F2F4F7",
                           borderTopLeftRadius: 8,
                           borderTopRightRadius: 8,
                           cursor: "pointer",
@@ -124,7 +126,7 @@ export default function MonthlySalesChart({ data, loading }: Props) {
                         className="transition-all"
                       />
                     </div>
-                    <div className="mt-2 text-xs text-[#667085]">{d.month}</div>
+                    <div className="mt-2 text-xs text-[#667085] dark:text-[#98A2B3]">{d.month}</div>
                   </div>
                 );
               })}
