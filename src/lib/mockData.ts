@@ -1,4 +1,13 @@
-import type { Product, Order, StatsSummary } from "@/types";
+import type {
+  Product,
+  Order,
+  StatsSummary,
+  Category,
+  HighlightProduct,
+  Testimonial,
+  HeroProduct,
+  DiscountCard,
+} from "@/types";
 
 // Start with a handful of hand-crafted products, then generate more so we have 30+ items
 const seedProducts: Product[] = [
@@ -156,3 +165,169 @@ export const mockStats: StatsSummary = {
     { month: "Dec", sales: 450 },
   ],
 };
+
+// Homepage mock data
+export const mockHeroProducts: HeroProduct[] = [
+  {
+    id: 1,
+    brand: "samsung",
+    title: "Galaxy S24 Ultra 5G",
+    description:
+      "Galaxy AI is here | Pro-grade camera, seamless 5G, and revolutionary AI – Redefine possibilities.",
+    price: "Buy Now $899",
+    image: "/hero-mobile.svg",
+    alt: "Galaxy S24 Ultra 5G",
+    type: "main",
+  },
+  {
+    id: 2,
+    brand: "xiaomi",
+    title: "Smart Security Home Camera",
+    description: "",
+    price: "Buy Now",
+    image: "/web-cam.svg",
+    alt: "hero-1",
+    type: "side",
+  },
+  {
+    id: 3,
+    brand: "redmi",
+    title: "Smart Watch 5 lite",
+    description: "",
+    price: "Buy Now",
+    image: "/mi-watch.svg",
+    alt: "hero-1",
+    type: "side",
+  },
+];
+
+export const mockCategories: Category[] = [
+  {
+    id: 1,
+    title: "DSLR Cameras",
+    count: 50,
+    image: "/canon-cam.svg",
+    alt: "canon-camera",
+  },
+  {
+    id: 2,
+    title: "Wireless Earbuds",
+    count: 45,
+    image: "/airbuds.svg",
+    alt: "earbuds",
+  },
+  {
+    id: 3,
+    title: "Wristwatch",
+    count: 120,
+    image: "/watch.png",
+    alt: "smart-watch",
+  },
+  {
+    id: 4,
+    title: "Skyflyer Drone",
+    count: 18,
+    image: "/drone.svg",
+    alt: "drone",
+  },
+  {
+    id: 5,
+    title: "Smart Speaker",
+    count: 75,
+    image: "/smart-speaker.svg",
+    alt: "smart-speaker",
+  },
+];
+
+export const mockHighlightProducts: HighlightProduct[] = [
+  {
+    id: 1,
+    title: "White Jacket",
+    price: "$249.00",
+    description: "Lightweight & water-resistant",
+    image: "/white-jacket.svg",
+    alt: "white-jacket",
+    isHot: false,
+  },
+  {
+    id: 2,
+    title: "Tote Bag",
+    price: "$299.00",
+    description: "Spacious & stylish",
+    image: "/teto-bag.svg",
+    alt: "smart-watch",
+    isHot: true,
+  },
+  {
+    id: 3,
+    title: "Beige Cap",
+    price: "$299.00",
+    description: "Soft breathable fabric",
+    image: "/cap.svg",
+    alt: "drone",
+    isHot: false,
+  },
+  {
+    id: 4,
+    title: "Qua Watch",
+    price: "$289.00",
+    description: "Modern rubber sole",
+    image: "/watch-2.svg",
+    alt: "earbuds",
+    isHot: false,
+  },
+];
+
+export const mockTestimonials: Testimonial[] = [
+  {
+    id: 1,
+    name: "Kathryn Murphy",
+    role: "CEO",
+    image: "/avatar-1.png",
+    testimonial:
+      "Working with this team has been a game-changer — their attention to detail, creativity, and commitment to deadlines exceeded every expectation I had.",
+    rating: 5,
+  },
+  {
+    id: 2,
+    name: "Theresa Webb",
+    role: "Web Designer",
+    image: "/avatar-2.png",
+    testimonial:
+      "What impressed me most wasn't just the design, but how deeply they cared about delivering something that made a difference for our users.",
+    rating: 5,
+  },
+  {
+    id: 3,
+    name: "Jerome Bell",
+    role: "Marketing Coordinator",
+    image: "/avatar-3.png",
+    testimonial:
+      "From the initial consultation to the final delivery, the process was seamless and incredibly professional — I've never felt more confident in a partnership.",
+    rating: 5,
+  },
+];
+
+export const mockDiscountCards: DiscountCard[] = [
+  {
+    id: 1,
+    type: "image",
+    image: "/discount-1.svg",
+    alt: "Discount 1",
+  },
+  {
+    id: 2,
+    type: "content",
+    title: "Don't Miss Out 50% OFF",
+    description:
+      "Get 50% Off – Limited Time Only Refresh your wardrobe with modern essentials.",
+    discount: "50% OFF",
+    buttonText: "Shop Now",
+  },
+  {
+    id: 3,
+    type: "image",
+    image: "/discount-2.svg",
+    alt: "Discount 2",
+  },
+];

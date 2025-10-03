@@ -29,3 +29,53 @@ export type StatsSummary = {
 };
 
 export type ApiListResponse<T> = { items: T[] };
+
+// Homepage data types
+export type Category = {
+  id: number;
+  title: string;
+  count: number;
+  image: string;
+  alt: string;
+};
+
+export type HighlightProduct = {
+  id: number;
+  title: string;
+  price: string;
+  description: string;
+  image: string;
+  alt: string;
+  isHot?: boolean;
+};
+
+export type Testimonial = {
+  id: number;
+  name: string;
+  role: string;
+  image: string;
+  testimonial: string;
+  rating: number;
+};
+
+export type HeroProduct = {
+  id: number;
+  brand: string;
+  title: string;
+  description: string;
+  price: string;
+  image: string;
+  alt: string;
+  type: "main" | "side";
+};
+
+export type DiscountCard = {
+  id: number;
+  title?: string;
+  description?: string;
+  discount?: string;
+  buttonText?: string;
+  image?: string;
+  alt?: string;
+  type: "image" | "content";
+};

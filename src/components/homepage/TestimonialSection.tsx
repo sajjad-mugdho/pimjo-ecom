@@ -1,32 +1,58 @@
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { apiGet } from "@/lib/api";
+import type { Testimonial } from "@/types";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 const TestimonialSection = () => {
-  const items = [
-    {
-      id: 1,
-      name: "Kathryn Murphy",
-      role: "CEO",
-      image: "/avatar-1.png",
-      testimonial:
-        "“Working with this team has been a game-changer — their attention to detail, creativity, and commitment to deadlines exceeded every expectation I had.”",
-    },
-    {
-      id: 2,
-      name: "Theresa Webb",
-      role: "Web Designer",
-      image: "/avatar-2.png",
-      testimonial:
-        "“What impressed me most wasn’t just the design, but how deeply they cared about delivering something that made a difference for our users.”",
-    },
-    {
-      id: 3,
-      name: "Jerome Bell",
-      role: "Marketing Coordinator",
-      image: "/avatar-3.png",
-      testimonial:
-        "“From the initial consultation to the final delivery, the process was seamless and incredibly professional — I’ve never felt more confident in a partnership.”",
-    },
-  ];
+  const [testimonials, setTestimonials] = useState<Testimonial[] | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    setLoading(true);
+    apiGet<{ items: Testimonial[] }>("/api/testimonials")
+      .then((res) => {
+        if (!mounted) return;
+        setTestimonials(res.items);
+        setError(null);
+      })
+      .catch((err) => {
+        if (!mounted) return;
+        setError(err.message || "Failed to load testimonials");
+      })
+      .finally(() => mounted && setLoading(false));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="flex items-center bg-[#F3F4F6] w-full justify-center mx-auto min-h-[700px]">
+        <div className="max-w-[1280px] w-full px-4 py-8 md:p-8 flex items-center justify-center">
+          <LoadingSpinner label="Loading testimonials…" />
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="flex items-center bg-[#F3F4F6] w-full justify-center mx-auto min-h-[700px]">
+        <div className="max-w-[1280px] w-full px-4 py-8 md:p-8 flex items-center justify-center">
+          <div className="text-sm text-red-600">
+            Error loading testimonials: {error}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="flex items-center bg-[#F3F4F6] w-full justify-center  mx-auto min-h-[700px]">
       <div className="max-w-[1280px] w-full px-4 py-8 md:p-8">
@@ -39,14 +65,14 @@ const TestimonialSection = () => {
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
-          {items.map((item) => (
+          {testimonials?.map((item) => (
             <div
               key={item.id}
               className="bg-white w-full max-w-[328px] md:max-w-[392px] min-h-[288px] md:h-[264px] p-6 rounded-2xl flex flex-col items-start text-left mx-auto"
             >
               {/* reviewer stars */}
               <div className="flex items-center mb-6">
-                {Array.from({ length: 5 }).map((_, index) => (
+                {Array.from({ length: item.rating }).map((_, index) => (
                   <svg
                     key={index}
                     className="w-5 h-5 text-yellow-400"

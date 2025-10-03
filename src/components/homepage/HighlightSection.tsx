@@ -1,50 +1,57 @@
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-
-type Product = {
-  id: number;
-  title: string;
-  price: string;
-  description: string;
-  image: string;
-  alt: string;
-};
-
-const products: Product[] = [
-  {
-    id: 1,
-    title: "White Jacket",
-    price: "$249.00",
-    description: "Lightweight & water-resistant",
-    image: "/white-jacket.svg",
-    alt: "white-jacket",
-  },
-  {
-    id: 2,
-    title: "Tote Bag",
-    price: "$299.00",
-    description: "Spacious & stylish",
-    image: "/teto-bag.svg",
-    alt: "smart-watch",
-  },
-  {
-    id: 3,
-    title: "Beige Cap",
-    price: "$299.00",
-    description: "Soft breathable fabric",
-    image: "/cap.svg",
-    alt: "drone",
-  },
-  {
-    id: 4,
-    title: "Qua Watch",
-    price: "$289.00",
-    description: "Modern rubber sole",
-    image: "/watch-2.svg",
-    alt: "earbuds",
-  },
-];
+import { apiGet } from "@/lib/api";
+import type { HighlightProduct } from "@/types";
+import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 const HighlightSection = () => {
+  const [products, setProducts] = useState<HighlightProduct[] | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let mounted = true;
+    setLoading(true);
+    apiGet<{ items: HighlightProduct[] }>("/api/highlights")
+      .then((res) => {
+        if (!mounted) return;
+        setProducts(res.items);
+        setError(null);
+      })
+      .catch((err) => {
+        if (!mounted) return;
+        setError(err.message || "Failed to load highlight products");
+      })
+      .finally(() => mounted && setLoading(false));
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="flex items-center bg-white w-full justify-center mx-auto min-h-[850px]">
+        <div className="max-w-[1280px] w-full mx-auto px:4 md:px-8 py-28 flex items-center justify-center">
+          <LoadingSpinner label="Loading highlight products…" />
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="flex items-center bg-white w-full justify-center mx-auto min-h-[850px]">
+        <div className="max-w-[1280px] w-full mx-auto px:4 md:px-8 py-28 flex items-center justify-center">
+          <div className="text-sm text-red-600">
+            Error loading highlight products: {error}
+          </div>
+        </div>
+      </section>
+    );
+  }
   return (
     <section className="flex items-center bg-white w-full justify-center  mx-auto min-h-[850px]">
       <div className="max-w-[1280px] w-full mx-auto px:4 md:px-8 py-28">
@@ -61,7 +68,7 @@ const HighlightSection = () => {
 
         {/* categories grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-7 mt-10">
-          {products.map((p) => (
+          {products?.map((p) => (
             <div
               key={p.id}
               className="bg-white flex flex-col items-center justify-center gap-y-3 p-4 rounded-lg"
@@ -74,8 +81,8 @@ const HighlightSection = () => {
                   className="object-cover rounded-[8px]"
                 />
 
-                {/* persistent hot badge for Tote Bag (product id 2) */}
-                {p.id === 2 && (
+                {/* persistent hot badge for products marked as hot */}
+                {p.isHot && (
                   <div className="absolute top-2 left-2 w-[80px] h-[28px] bg-[#FEF2F2] text-[#B91C1C] rounded-[16px] flex items-center justify-center text-sm font-medium z-20">
                     Hot Item
                   </div>
